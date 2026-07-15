@@ -1,3 +1,15 @@
+import { CharacterStage } from './components/CharacterStage'
+import { footerLine } from './data/content'
+import { useActiveSection } from './hooks/useActiveSection'
+import { useRevealOnScroll } from './hooks/useRevealOnScroll'
+import { About } from './sections/About'
+import { Contact } from './sections/Contact'
+import { Experience } from './sections/Experience'
+import { Hero } from './sections/Hero'
+import { Work } from './sections/Work'
+
+const SECTION_IDS = ['hero', 'about', 'experience', 'work', 'contact'] as const
+
 const NAV = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
@@ -6,6 +18,9 @@ const NAV = [
 ]
 
 function App() {
+  const activeSection = useActiveSection(SECTION_IDS)
+  useRevealOnScroll()
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -21,38 +36,15 @@ function App() {
         </nav>
       </header>
       <main id="main">
-        <section id="hero" className="section" aria-labelledby="hero-heading">
-          {/* copy lands in src/data/content.ts (Phase 2) */}
-          <h1 id="hero-heading">TODO(toby): name</h1>
-          <p className="placeholder-note">TODO(toby): tagline — Phase 2</p>
-        </section>
-        <section id="about" className="section" aria-labelledby="about-heading">
-          <h2 id="about-heading">About</h2>
-          <div className="panel">
-            <p className="placeholder-note">Bio panel — Phase 2/3</p>
-          </div>
-        </section>
-        <section id="experience" className="section" aria-labelledby="experience-heading">
-          <h2 id="experience-heading">Experience</h2>
-          <div className="panel">
-            <p className="placeholder-note">Timeline — Phase 3</p>
-          </div>
-        </section>
-        <section id="work" className="section" aria-labelledby="work-heading">
-          <h2 id="work-heading">Projects &amp; Papers</h2>
-          <div className="panel">
-            <p className="placeholder-note">Cards — Phase 3</p>
-          </div>
-        </section>
-        <section id="contact" className="section" aria-labelledby="contact-heading">
-          <h2 id="contact-heading">Contact</h2>
-          <div className="panel">
-            <p className="placeholder-note">Links — Phase 2/3</p>
-          </div>
-        </section>
+        <Hero />
+        <About />
+        <Experience />
+        <Work />
+        <Contact />
       </main>
+      <CharacterStage activeSection={activeSection} />
       <footer className="site-footer">
-        <p>TODO(toby): footer sign-off</p>
+        <p>{footerLine}</p>
       </footer>
     </>
   )

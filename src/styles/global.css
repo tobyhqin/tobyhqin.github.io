@@ -178,6 +178,151 @@ main {
   color: var(--ink-soft);
 }
 
+/* ---- hero ---- */
+
+.section--hero {
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-kicker {
+  font-family: var(--font-lettering);
+  font-size: 1.4rem;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+
+.hero-tagline {
+  font-size: 1.35rem;
+  color: var(--ink-soft);
+}
+
+/* ---- experience timeline ---- */
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.timeline-item h3 {
+  margin-bottom: var(--space-1);
+}
+
+.timeline-role {
+  font-family: var(--font-lettering);
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.timeline-period {
+  color: var(--ink-soft);
+}
+
+.timeline-item ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.timeline-item li {
+  margin-bottom: var(--space-1);
+}
+
+/* ---- work cards ---- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-3);
+}
+
+.card-kind {
+  font-family: var(--font-lettering);
+  color: var(--tiger);
+  margin-bottom: var(--space-1);
+}
+
+.card-venue {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* ---- contact ---- */
+
+.contact-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  font-family: var(--font-lettering);
+  font-size: 1.3rem;
+}
+
+/* ---- character stage ---- */
+
+.character-stage {
+  position: fixed;
+  right: clamp(0.5rem, 3vw, 3rem);
+  bottom: 0.5rem;
+  z-index: 5;
+  pointer-events: none;
+  transition: transform var(--duration) ease-out;
+}
+
+.character-pose {
+  animation: pose-enter 500ms ease-out both;
+}
+
+.character-pose img,
+.character-pose video {
+  max-width: clamp(7rem, 18vw, 15rem);
+  height: auto;
+  display: block;
+}
+
+.standin-duo {
+  text-align: center;
+}
+
+.standin-caption {
+  font-family: var(--font-lettering);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@keyframes pose-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) rotate(-4deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- scroll reveals ---- */
+
+/* Content is visible by default; the hook adds .reveal-pending, then removes it
+   on intersection. If JS/IntersectionObserver never runs, nothing is ever hidden. */
+.reveal {
+  transition:
+    opacity 600ms ease-out,
+    transform 600ms ease-out;
+}
+
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
 /* ---- motion floor ---- */
 
 @media (prefers-reduced-motion: reduce) {

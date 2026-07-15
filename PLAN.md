@@ -38,12 +38,14 @@ Read `AGENTS.md` before touching code. Update `HANDOFF.md` at the end of every s
       installed, git init, build green, planning docs written. (2026-07-13)
 - [x] Phase 1 — Theme & layout shell: C&H design tokens + five-section skeleton,
       build green, 375px OK. (2026-07-15)
-- [ ] Phase 2 — Content data model
-- [ ] Phase 3 — Static sections
-- [ ] Phase 4 — Hero 3D scene
-- [ ] Phase 5 — Scroll reveals & motion polish
-- [ ] Phase 6 — Higgsfield media slots + generation doc
-- [ ] Phase 7 — Deploy workflow
+- [x] Phase 2 — Content data model: `src/data/content.ts` from real resume. (2026-07-15)
+- [x] Phase 3 — Static sections: Hero/About/Experience/Work/Contact. (2026-07-15)
+- [x] Phase 4 — Hero: live 3D dropped per Toby; comic hero, character media carries it. (2026-07-15)
+- [x] Phase 5 — Character choreography + scroll reveals: CharacterStage, pose swaps,
+      wagon scroll ride, SVG stand-ins, reveal fail-safe. (2026-07-15)
+- [x] Phase 6 — CLI verified+installed, media slots, docs/HIGGSFIELD.md.
+      **Generation blocked on `higgsfield auth login` (Toby).** (2026-07-15)
+- [x] Phase 7 — Deploy workflow: .github/workflows/deploy.yml. (2026-07-15)
 - [ ] Phase 8 — Go live (manual gates with Toby)
 
 ## Phases
@@ -127,12 +129,17 @@ Vite `base` stays `/` (user site = domain root).
 | Higgsfield | Account exists; CLI claimed to be `npm install -g @higgsfield/cli` — **verify on registry first** |
 | Image generation | nano banana 2 available for character stills |
 
+## Decisions from Toby (2026-07-15, session 3)
+
+| Item | Decision |
+|---|---|
+| Copyright call | **Real Calvin & Hobbes imagery.** Risk was explained (unlicensed = higher exposure, not lower); Toby accepts it for a personal non-commercial site. |
+| Public email | toby@bffofamerica.org |
+| 3D hero | **Drop live R3F 3D.** Hero stays comic-themed; character media carries it. three/@react-three deps stay installed but unused for now (possible future easter egg). |
+
 ## Open items (need Toby's input)
 
 | Item | Needed by |
 |---|---|
-| Actual C&H characters vs. original look-alike duo (copyright) | Phase 6 (before generating final assets) |
-| Public email for Contact (resume has school email — use it publicly?) | Phase 2 |
-| Keep live 3D hero or let character video carry it | Phase 4 |
 | Papers format details (abstracts? BibTeX?) | Phase 2–3 |
 | Custom favicon (current is Vite default) | Phase 6 |
