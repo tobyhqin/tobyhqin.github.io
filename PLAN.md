@@ -43,8 +43,9 @@ Read `AGENTS.md` before touching code. Update `HANDOFF.md` at the end of every s
 - [x] Phase 4 — Hero: 3D reinstated per Toby → toon red wagon R3F scene, lazy chunk. (2026-07-15)
 - [x] Phase 5 — Character choreography + scroll reveals: CharacterStage, pose swaps,
       wagon scroll ride, SVG stand-ins, reveal fail-safe. (2026-07-15)
-- [x] Phase 6 — CLI verified+installed, media slots, docs/HIGGSFIELD.md.
-      **Generation blocked on `higgsfield auth login` (Toby).** (2026-07-15)
+- [x] Phase 6 — CLI verified+installed, media slots, docs/HIGGSFIELD.md; the original
+      hero loop is shipped. **Seedance 2.0 regeneration is pending entitlement sync.**
+      (2026-07-15)
 - [x] Phase 7 — Deploy workflow: .github/workflows/deploy.yml. (2026-07-15)
 - [ ] Phase 8 — Go live (manual gates with Toby)
 
@@ -144,3 +145,4 @@ Vite `base` stays `/` (user site = domain root).
 |---|---|
 | Papers format details (abstracts? BibTeX?) | Phase 2–3 |
 | Custom favicon (current is Vite default) | Phase 6 |
+| Higgsfield Seedance 2.0 CLI entitlement sync | Session 6 regeneration |

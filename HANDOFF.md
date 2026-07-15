@@ -3,6 +3,28 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md` first, then `PLAN.md`, then this.
 
+## Current session status (2026-07-15) — READ THIS FIRST
+
+- The required first check completed via the installed `higgsfield` launcher:
+  `higgsfield model get seedance_2_0`. Defaults are 720p, 5 seconds, standard
+  bitrate, and audio enabled.
+- The five original high-resolution stills are present in
+  `C:\Users\tobyh\Downloads`: `heroimage.png`, `aboutimage.png`,
+  `experienceimage.png`, `workimage.png`, and `contactimage.png`.
+- The web account screenshot shows an active one-day **Seedance 2.0 Unlimited**
+  entitlement. The authenticated CLI account/workspace instead reports `plus` / 10
+  credits; its read-only default-job estimate is 22.5 credits.
+- The first requested hero create was rejected before a job was created with
+  `free_trial_model_requires_plan`. No Seedance videos were generated or charged.
+  The old Gemini Omni `public/media/characters/hero.webm` remains in place, and
+  `CharacterStage.tsx` still has `video: true` only on hero.
+- **CLI quirk:** numeric-looking string params can mis-parse (for example,
+  `--resolution "768"`). Omit optional numeric flags and use model defaults.
+- Resume once the CLI sees the active entitlement: generate all five slots from the
+  Downloads stills using the prompts in `docs/HIGGSFIELD.md`, post-process to muted
+  VP9 WebM (≤600px, ≤2MB, `lutrgb` match to `#fbf6ea`), set all five video flags,
+  verify in a real browser, then commit and push.
+
 **Last session:** 2026-07-15 (later) — 3D hero reinstated, footer removed, Higgsfield authed
 
 ## Session-6 delta (2026-07-15 night) — READ THIS FIRST NEXT SESSION
@@ -82,8 +104,11 @@
 
 ## Next steps (in order)
 
+0. **Resolve the Higgsfield CLI entitlement sync.** The web account shows active
+   Seedance 2.0 Unlimited, but the authenticated CLI workspace reports Plus / 10
+   credits and rejected the first create with `free_trial_model_requires_plan`.
 1. **Regenerate all five character videos with Seedance 2.0** per the Session-6
-   directive above (auth is done, plan now unlimited for seedance_2_0).
+   directive above once the CLI sees the active entitlement.
 2. Toby eyeballs the site in a real browser (3D wagon hero, pose swaps, wagon ride —
    still never human-verified; preview pane can't render motion).
 3. Toby: repo **Settings → Pages → Source: GitHub Actions** (repo is pushed;
@@ -91,6 +116,7 @@
 
 ## Blocked on Toby
 
+- Higgsfield CLI entitlement sync for Seedance 2.0 (see step 0 above)
 - GitHub Pages source setting (see above)
 - Real-browser visual check
 
