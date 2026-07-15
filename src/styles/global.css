@@ -1,0 +1,195 @@
+/* ============================================================
+   Design tokens — Calvin & Hobbes comic theme
+   Newsprint paper, ink lines, hand lettering, wagon-red accent.
+   ============================================================ */
+
+:root {
+  /* color */
+  --paper: #fbf6ea;        /* aged newsprint */
+  --panel: #fffdf7;        /* panel interior, slightly brighter than page */
+  --ink: #211d19;
+  --ink-soft: #5c544c;
+  --accent: #cf3f36;       /* the red wagon */
+  --tiger: #e8862e;        /* Hobbes orange, secondary accent */
+
+  /* type — hand lettering (headings) + handwriting (body) */
+  --font-lettering: 'Patrick Hand SC', 'Comic Sans MS', sans-serif;
+  --font-hand: 'Patrick Hand', 'Comic Sans MS', sans-serif;
+  --text-base: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
+  --text-h2: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-hero: clamp(3rem, 1.8rem + 5.5vw, 6.5rem);
+
+  /* spacing */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --space-4: 4rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
+
+  /* comic panel treatment */
+  --line: 3px solid var(--ink);
+  /* asymmetric radii ≈ hand-drawn wobble on panel borders */
+  --wobble: 255px 15px 225px 15px / 15px 225px 15px 255px;
+
+  --duration: 300ms;
+  --content-width: 64rem;
+}
+
+/* ---- reset-ish base ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-hand);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-lettering);
+  font-weight: 400; /* the SC face is already bold-feeling; browser-bold distorts it */
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-2);
+}
+
+h1 {
+  font-size: var(--text-hero);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  display: inline-block;
+  border-bottom: var(--line);
+  border-radius: var(--wobble);
+  padding: 0 var(--space-2) var(--space-1);
+}
+
+p {
+  margin: 0 0 var(--space-2);
+  max-width: 60ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--ink);
+  background: var(--tiger);
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 3px dashed var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---- layout shell ---- */
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-1) var(--space-2);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: var(--line);
+}
+
+.site-nav {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-1) var(--space-2);
+  display: flex;
+  gap: var(--space-2) var(--space-3);
+  flex-wrap: wrap;
+  font-family: var(--font-lettering);
+  font-size: 1.25rem;
+}
+
+.site-nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+  background: none;
+}
+
+main {
+  display: block;
+}
+
+.section {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-section) var(--space-2);
+  min-height: 60vh;
+}
+
+/* hand-drawn comic panel */
+.panel {
+  background: var(--panel);
+  border: var(--line);
+  border-radius: var(--wobble);
+  padding: var(--space-3);
+}
+
+.placeholder-note {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.site-footer {
+  border-top: var(--line);
+  text-align: center;
+  padding: var(--space-3) var(--space-2);
+  font-family: var(--font-lettering);
+  color: var(--ink-soft);
+}
+
+/* ---- motion floor ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

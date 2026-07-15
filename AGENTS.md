@@ -17,17 +17,17 @@ GitHub Pages at `<username>.github.io`.
 | Stack | Vite + React + TypeScript |
 | 3D | Hybrid: live three.js via @react-three/fiber + drei, plus Higgsfield-generated media assets |
 | Structure | Single long scroll page: Hero → About → Experience → Projects & Papers → Contact |
-| Design | Clean minimal **light** — near-white background, restrained type, whitespace, 3D as accent (not dark/cinematic, not playful) |
-| Hosting | GitHub Pages user site, deployed by GitHub Actions from `main`; Vite `base: '/'` |
+| Design | **Calvin & Hobbes comic theme** (Toby's decision 2026-07-15, supersedes "clean minimal"): newsprint paper, ink panels, hand lettering, character duo that changes pose/activity per section on scroll — see PLAN.md "Character choreography" |
+| Hosting | GitHub Pages user site `tobyhqin.github.io`, deployed by GitHub Actions from `main`; Vite `base: '/'` |
 | Projects & papers | One combined section; shared card type with optional paper fields (venue, paperUrl) |
 | Contact links | LinkedIn, ORCID, Instagram |
 
 ## Placeholder policy (things intentionally TBD)
 
-Toby is renaming his GitHub account — **`<username>` is a placeholder everywhere**;
-never hardcode an account name. Also TBD: display name, public email, link URLs, real
-resume content, hero visual concept. Use clearly-marked placeholders (`TODO(toby): ...`)
-and keep them all listed in PLAN.md "Open items". Real content lands in
+Username is **`tobyhqin`** (confirmed 2026-07-15); most content inputs are now resolved —
+see PLAN.md "Resolved inputs". Still TBD: public email, C&H-vs-lookalike copyright call,
+3D-hero keep/drop, favicon. Use clearly-marked placeholders (`TODO(toby): ...`) for those
+and keep them listed in PLAN.md "Open items". Real content lands in
 `src/data/content.ts` only — components never contain copy.
 
 ## Hard rules
@@ -35,8 +35,10 @@ and keep them all listed in PLAN.md "Open items". Real content lands in
 - **Dependency policy:** allowed runtime deps are exactly `react`, `react-dom`, `three`,
   `@react-three/fiber`, `@react-three/drei`. No animation/scroll/UI libraries — use
   native IntersectionObserver + CSS. Adding any dep requires asking Toby first.
-- **Higgsfield is a manual gate.** Toby has no account yet. Never attempt signup, auth,
-  or generation calls. Code against placeholder assets in `public/media/`; the human
+- **Higgsfield:** Toby has an account (2026-07-15) and OK'd CLI generation. Before any
+  `npm install -g @higgsfield/cli`, verify the package on the npm registry (publisher,
+  downloads, repo link) — unverified global installs are a squatting vector. Auth/login
+  is still Toby's manual step. Code against placeholder assets in `public/media/`; the
   workflow lives in `docs/HIGGSFIELD.md` (Phase 6).
 - **GitHub Pages limits:** 100 MB max per file, ~1 GB repo soft cap. Media must be
   compressed short loops (target ≤5 MB each). Never commit raw generated video.
