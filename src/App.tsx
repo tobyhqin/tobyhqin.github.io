@@ -1,5 +1,4 @@
 import { CharacterStage } from './components/CharacterStage'
-import { footerLine } from './data/content'
 import { useActiveSection } from './hooks/useActiveSection'
 import { useRevealOnScroll } from './hooks/useRevealOnScroll'
 import { About } from './sections/About'
@@ -43,9 +42,6 @@ function App() {
         <Contact />
       </main>
       <CharacterStage activeSection={activeSection} />
-      <footer className="site-footer">
-        <p>{footerLine}</p>
-      </footer>
     </>
   )
 }

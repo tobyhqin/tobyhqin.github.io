@@ -40,7 +40,7 @@ Read `AGENTS.md` before touching code. Update `HANDOFF.md` at the end of every s
       build green, 375px OK. (2026-07-15)
 - [x] Phase 2 — Content data model: `src/data/content.ts` from real resume. (2026-07-15)
 - [x] Phase 3 — Static sections: Hero/About/Experience/Work/Contact. (2026-07-15)
-- [x] Phase 4 — Hero: live 3D dropped per Toby; comic hero, character media carries it. (2026-07-15)
+- [x] Phase 4 — Hero: 3D reinstated per Toby → toon red wagon R3F scene, lazy chunk. (2026-07-15)
 - [x] Phase 5 — Character choreography + scroll reveals: CharacterStage, pose swaps,
       wagon scroll ride, SVG stand-ins, reveal fail-safe. (2026-07-15)
 - [x] Phase 6 — CLI verified+installed, media slots, docs/HIGGSFIELD.md.
@@ -135,7 +135,8 @@ Vite `base` stays `/` (user site = domain root).
 |---|---|
 | Copyright call | **Real Calvin & Hobbes imagery.** Risk was explained (unlicensed = higher exposure, not lower); Toby accepts it for a personal non-commercial site. |
 | Public email | toby@bffofamerica.org |
-| 3D hero | **Drop live R3F 3D.** Hero stays comic-themed; character media carries it. three/@react-three deps stay installed but unused for now (possible future easter egg). |
+| 3D hero | ~~Dropped~~ → **REINSTATED (Toby, later same day): live 3D hero required.** Built as toon-shaded red wagon with ink outlines, float + mouse parallax, in `src/three/HeroScene.tsx` (lazy-loaded, WebGL-gated, reduced-motion static). |
+| Footer | **No footer text** (Toby) — footer element removed entirely. |
 
 ## Open items (need Toby's input)
 

@@ -31,14 +31,16 @@ Transparent or plain-cream (#fbf6ea) backgrounds only — the page background is
 | `work.webp` | Spaceman Spiff pose, investigating |
 | `contact.webp` | The two walking away through snow, waving (final-strip vibe) |
 
-## Generation workflow
+## Generation workflow (division of labor decided 2026-07-15)
 
-1. `hf model list` / `hf model list --video` — pick current best image + video models.
-2. Stills: `hf generate create <image-model> --prompt "<prompt below>"`.
-   Video: generate the hero still first, `hf upload` it, then image-to-video with
-   `--image <upload_id>` for a consistent loop.
-3. `hf generate wait <job_id>` then download the result.
-4. Alternative for stills: nano banana 2 (Toby has access) — same prompts.
+- **Stills: Toby generates them in nano banana 2** using the prompts below, then hands
+  the files over (any folder path works).
+- **Video: Claude generates via Higgsfield CLI** (authenticated 2026-07-15, workspace
+  `Private`, free plan — **10 credits**; check `hf generate cost` before running jobs):
+  1. `hf upload` Toby's hero still → get `upload_id`.
+  2. `hf model list --video` → pick an image-to-video model within credit budget.
+  3. `hf generate create <model> --prompt "<hero motion prompt>" --image <upload_id>`.
+  4. `hf generate wait <job_id>`, download, compress (below).
 
 ### Prompt template (append the per-slot action)
 

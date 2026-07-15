@@ -170,21 +170,36 @@ main {
   font-style: italic;
 }
 
-.site-footer {
-  border-top: var(--line);
-  text-align: center;
-  padding: var(--space-3) var(--space-2);
-  font-family: var(--font-lettering);
-  color: var(--ink-soft);
-}
-
 /* ---- hero ---- */
 
 .section--hero {
-  min-height: 82vh;
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+}
+
+.hero-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(48%, 34rem);
+}
+
+@media (max-width: 48rem) {
+  .hero-visual {
+    width: 100%;
+    opacity: 0.3;
+    z-index: 0;
+  }
 }
 
 .hero-kicker {

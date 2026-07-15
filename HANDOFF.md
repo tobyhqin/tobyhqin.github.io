@@ -3,7 +3,21 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md` first, then `PLAN.md`, then this.
 
-**Last session:** 2026-07-15 — Phases 2–7 in one pass (Toby unblocked all decisions)
+**Last session:** 2026-07-15 (later) — 3D hero reinstated, footer removed, Higgsfield authed
+
+## Session-4 delta
+
+- Toby reversed the 3D decision: `src/three/HeroScene.tsx` now renders a toon-shaded
+  red wagon (ink Outlines, Float, pointer parallax; lazy chunk ~237 kB gz; WebGL-gated;
+  reduced-motion static). Footer + footerLine removed entirely.
+- Higgsfield CLI authenticated (toby.h.qin@gmail.com, workspace Private, free plan,
+  **10 credits** — check `hf generate cost` before video jobs).
+- Division of labor: Toby generates stills in nano banana 2 (prompts in
+  docs/HIGGSFIELD.md); Claude runs image-to-video via `hf` for the hero loop.
+- Repo name confirmed for Phase 8: must be exactly `tobyhqin.github.io`.
+- More skills installed: hallmark, find-skills, threejs-fundamentals, threejs-animation.
+- Canvas verified mounted + error-free in preview pane, but pane can't do visual/
+  resize verification (throttled renderer) — real-browser eyeball still pending.
 
 ## Current state
 

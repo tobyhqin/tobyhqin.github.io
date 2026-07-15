@@ -140,5 +140,3 @@ export const links: ContactLink[] = [
   { label: 'ORCID', url: 'https://orcid.org/0009-0007-8119-4386' },
   { label: 'Instagram', url: 'https://instagram.com/toby.qin' },
 ]
-
-export const footerLine = "It's a magical world, ol' buddy… let's go exploring!"
