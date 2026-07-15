@@ -9,7 +9,7 @@ export function Work() {
       <div className="card-grid">
         {works.map((work) => (
           <article key={work.title} className="panel card reveal">
-            <p className="card-kind">{work.kind === 'paper' ? '📄 Paper' : '🛠 Project'}</p>
+            <p className="card-kind">{work.kind === 'paper' ? 'Paper' : 'Project'}</p>
             <h3>{work.title}</h3>
             <p>{work.description}</p>
             {work.venue && <p className="card-venue">{work.venue}</p>}

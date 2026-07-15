@@ -1,129 +1,40 @@
 # HANDOFF.md
 
-> Rewritten at the end of every session. Describes the state of the repo *right now*.
+> Rewritten at the end of every session. Describes the state of the repo right now.
 > New session: read `AGENTS.md` first, then `PLAN.md`, then this.
 
-## Current session status (2026-07-15) — READ THIS FIRST
+## Current session status — 2026-07-15
 
-- The required first check completed via the installed `higgsfield` launcher:
-  `higgsfield model get seedance_2_0`. Defaults are 720p, 5 seconds, standard
-  bitrate, and audio enabled.
-- The five original high-resolution stills are present in
-  `C:\Users\tobyh\Downloads`: `heroimage.png`, `aboutimage.png`,
-  `experienceimage.png`, `workimage.png`, and `contactimage.png`.
-- The web account screenshot shows an active one-day **Seedance 2.0 Unlimited**
-  entitlement. The authenticated CLI account/workspace instead reports `plus` / 10
-  credits; its read-only default-job estimate is 22.5 credits.
-- The first requested hero create was rejected before a job was created with
-  `free_trial_model_requires_plan`. No Seedance videos were generated or charged.
-  The old Gemini Omni `public/media/characters/hero.webm` remains in place, and
-  `CharacterStage.tsx` still has `video: true` only on hero.
-- **CLI quirk:** numeric-looking string params can mis-parse (for example,
-  `--resolution "768"`). Omit optional numeric flags and use model defaults.
-- Resume once the CLI sees the active entitlement: generate all five slots from the
-  Downloads stills using the prompts in `docs/HIGGSFIELD.md`, post-process to muted
-  VP9 WebM (≤600px, ≤2MB, `lutrgb` match to `#fbf6ea`), set all five video flags,
-  verify in a real browser, then commit and push.
+- The visual direction is now a simple, realistic nature-exploration journey with no people
+  or avatars in generated media.
+- The retired character, comic, and 3D hero implementation has been removed from the active
+  source tree. The old generated media files are also removed from the working tree.
+- `src/App.tsx` now renders only the five semantic sections. `Hero.tsx` uses a lightweight CSS
+  mountain placeholder until final media is generated; no WebGL or character layer remains.
+- `src/styles/global.css` now contains the responsive nature palette, typography, cards,
+  mountain placeholder, mobile navigation behavior, and reduced-motion rules.
+- The five detailed scene prompts and media constraints are in `docs/NATURE-EXPLORATION.md`.
+- Responsive requirements are recorded in `PLAN.md`: 375px mobile, 1280–1440px desktop,
+  no horizontal overflow, stacked mobile hero, fluid cards, touch-safe links, and still-image
+  fallbacks for motion media.
 
-**Last session:** 2026-07-15 (later) — 3D hero reinstated, footer removed, Higgsfield authed
+## Nature scene sequence
 
-## Session-6 delta (2026-07-15 night) — READ THIS FIRST NEXT SESSION
+1. Hero — trailhead and mountain overlook at first light.
+2. About — shaded forest path with a creek and field-guide atmosphere.
+3. Experience — rocky switchback route through layered mountain terrain.
+4. Work — practical basecamp table with maps, compass, notebook, and gear.
+5. Contact — quiet summit at sunset with an open route continuing into the distance.
 
-- Hero video shipped: Toby's Gemini Omni clip was cut (black fade-in intro removed),
-  ping-ponged for a seamless loop, background color-matched to the paper via
-  ffmpeg `lutrgb` gains, encoded VP9 WebM 600px crf 44 (~2 MB). Live on the hero,
-  verified playing/looping in preview. Commit 30932d2.
-- **NEW DIRECTIVE FROM TOBY (not yet executed):** he re-logged into Higgsfield and
-  now has **unlimited access to Seedance 2.0** (`seedance_2_0`, listed in
-  `hf model list --video`). **Scratch the Gemini Omni hero video and regenerate ALL
-  FIVE character videos with Seedance 2.0 via the CLI** (hero, about, experience,
-  work, contact). Use the per-slot motion prompts from the 2026-07-15 chat /
-  docs/HIGGSFIELD.md, with the anti-failure constraints baked in: first frame =
-  exactly the input still (no fade-in from black), static camera, characters
-  anchored in place, steady ~2s motion cycle for loopability, background unchanged.
-  Start-image = the original stills in `~/Downloads` (heroimage.png, aboutimage.png,
-  experienceimage.png, workimage.png, contactimage.png — higher res than the webps).
-  Run `hf model get seedance_2_0` first for params; remember the CLI quirk below.
-  Post-process each: trim/loop-cut or ping-pong, `lutrgb` color-match bg to #fbf6ea,
-  VP9 WebM ≤600px, target ≤2 MB, mute. Drop into `public/media/characters/<slot>.webm`,
-  set `video: true` on all five poses in `src/components/CharacterStage.tsx`,
-  verify, commit, push.
-- CharacterStage currently has `video: true` ONLY on the hero pose — flip the other
-  four when their videos land.
+## Next steps
 
-## Session-5 delta (2026-07-15 evening)
+1. Generate the five still images using `docs/NATURE-EXPLORATION.md`.
+2. Review crops on desktop and mobile; keep the focal region inside the central safe area.
+3. Add optimized stills to `public/media/nature/` and optional muted short loops if desired.
+4. Integrate the scenes into the sections with posters, lazy loading, and reduced-motion fallbacks.
+5. Run the full build/lint/browser verification loop, then set GitHub Pages to GitHub Actions.
 
-- All five character stills generated by Toby in nano banana 2, processed (trim,
-  background→alpha, ≤700px WebP, 52–144 KB each) into `public/media/characters/`.
-  Stage verified serving real art; SVG stand-ins now dormant fallbacks.
-- **Hero video attempt failed:** minimax_hailuo (6 credits) produced character-melt
-  drift by ~1 s — deleted, not shipped. Hero uses the still. **4 credits remain**
-  (< cheapest job at 6); retry needs top-up; kling3_0_turbo needs Basic plan.
-  CLI quirk: `--resolution "768"` mis-parses as number — omit the flag for defaults.
-- Remote added and pushed: https://github.com/tobyhqin/tobyhqin.github.io
-  **Toby still must set repo Settings → Pages → Source: GitHub Actions.**
+## Verification
 
-## Session-4 delta
-
-- Toby reversed the 3D decision: `src/three/HeroScene.tsx` now renders a toon-shaded
-  red wagon (ink Outlines, Float, pointer parallax; lazy chunk ~237 kB gz; WebGL-gated;
-  reduced-motion static). Footer + footerLine removed entirely.
-- Higgsfield CLI authenticated (toby.h.qin@gmail.com, workspace Private, free plan,
-  **10 credits** — check `hf generate cost` before video jobs).
-- Division of labor: Toby generates stills in nano banana 2 (prompts in
-  docs/HIGGSFIELD.md); Claude runs image-to-video via `hf` for the hero loop.
-- Repo name confirmed for Phase 8: must be exactly `tobyhqin.github.io`.
-- More skills installed: hallmark, find-skills, threejs-fundamentals, threejs-animation.
-- Canvas verified mounted + error-free in preview pane, but pane can't do visual/
-  resize verification (throttled renderer) — real-browser eyeball still pending.
-
-## Current state
-
-- **Site is feature-complete against the plan, with SVG stand-ins for character art.**
-- Phase 2: `src/data/content.ts` — all real content from Toby's resume; email
-  toby@bffofamerica.org; links (LinkedIn/GitHub/ORCID/Instagram).
-- Phase 3: `src/sections/` — Hero, About, Experience (timeline), Work (cards), Contact.
-- Phase 4: live 3D hero **dropped** per Toby; three/@react-three deps still in
-  package.json but unimported (possible future easter egg; safe to remove).
-- Phase 5: `CharacterStage` (fixed layer, pose per section via `useActiveSection`
-  IntersectionObserver hook, wagon scroll-ride in Experience, `StandInDuo` ink-line SVG
-  fallback) + `useRevealOnScroll` fade-ups with a 2s fail-safe so content can never be
-  permanently hidden.
-- Phase 6: `@higgsfield/cli` verified (inspected tarball — clean official binary
-  downloader) and installed globally (`higgsfield`/`higgs`/`hf`). `docs/HIGGSFIELD.md`
-  has per-slot prompts + compression rules. `public/media/characters/` slots empty.
-- Phase 7: `.github/workflows/deploy.yml` (official Pages actions).
-- Verified: build green; full-page content, stand-in render, fail-safe, and 375px
-  no-overflow checked in the preview pane. **Pose-swap choreography NOT visually
-  verified** — the preview pane's renderer never fires IntersectionObserver (also
-  breaks screenshots); needs an eyeball in a real browser.
-- Toby's decisions this session: real C&H imagery (risk explained + accepted),
-  email above, no 3D hero.
-- Also: 9 Vercel agent-skills installed to `.agents/skills`; `claude` CLI login done
-  but Remote Control blocked by org policy on Toby's account.
-
-## Next steps (in order)
-
-0. **Resolve the Higgsfield CLI entitlement sync.** The web account shows active
-   Seedance 2.0 Unlimited, but the authenticated CLI workspace reports Plus / 10
-   credits and rejected the first create with `free_trial_model_requires_plan`.
-1. **Regenerate all five character videos with Seedance 2.0** per the Session-6
-   directive above once the CLI sees the active entitlement.
-2. Toby eyeballs the site in a real browser (3D wagon hero, pose swaps, wagon ride —
-   still never human-verified; preview pane can't render motion).
-3. Toby: repo **Settings → Pages → Source: GitHub Actions** (repo is pushed;
-   this is the only thing between the repo and a live site).
-
-## Blocked on Toby
-
-- Higgsfield CLI entitlement sync for Seedance 2.0 (see step 0 above)
-- GitHub Pages source setting (see above)
-- Real-browser visual check
-
-## Warnings / gotchas
-
-- The desktop-app preview pane never fires IntersectionObserver and times out on
-  screenshots — verify scroll behavior in a real browser, not the pane.
-- One 404 per missing character asset in console is expected (fallback probing).
-- Patrick Hand SC must stay `font-weight: 400`; h2 is inline-block for the wobbly
-  underline (see session-1 notes).
+The redesign is in progress. Re-run `npm run build`, `npx tsc --noEmit`, `npm run lint`,
+`git diff --check`, and browser checks at desktop and 375px mobile before the next commit.

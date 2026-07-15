@@ -1,13 +1,9 @@
-import { CharacterStage } from './components/CharacterStage'
-import { useActiveSection } from './hooks/useActiveSection'
 import { useRevealOnScroll } from './hooks/useRevealOnScroll'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
 import { Hero } from './sections/Hero'
 import { Work } from './sections/Work'
-
-const SECTION_IDS = ['hero', 'about', 'experience', 'work', 'contact'] as const
 
 const NAV = [
   { id: 'about', label: 'About' },
@@ -17,7 +13,6 @@ const NAV = [
 ]
 
 function App() {
-  const activeSection = useActiveSection(SECTION_IDS)
   useRevealOnScroll()
 
   return (
@@ -41,7 +36,6 @@ function App() {
         <Work />
         <Contact />
       </main>
-      <CharacterStage activeSection={activeSection} />
     </>
   )
 }

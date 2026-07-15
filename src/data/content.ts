@@ -23,7 +23,9 @@ export type ContactLink = {
 
 export const bio = {
   name: 'Toby Qin',
+  kicker: 'A field guide to ideas, places, and possibility.',
   tagline: 'Student · researcher · builder — exploring economics, science, and everything in between.',
+  contactIntro: 'Thanks for following the trail. Let’s keep exploring.',
   about: [
     `I'm a student at East Chapel Hill High School in North Carolina (class of 2027),
      where I'm ranked 1st in my class. I spend my time on econometrics research,

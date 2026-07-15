@@ -1,41 +1,30 @@
-/* ============================================================
-   Design tokens — Calvin & Hobbes comic theme
-   Newsprint paper, ink lines, hand lettering, wagon-red accent.
-   ============================================================ */
-
 :root {
-  /* color */
-  --paper: #fbf6ea;        /* aged newsprint */
-  --panel: #fffdf7;        /* panel interior, slightly brighter than page */
-  --ink: #211d19;
-  --ink-soft: #5c544c;
-  --accent: #cf3f36;       /* the red wagon */
-  --tiger: #e8862e;        /* Hobbes orange, secondary accent */
-
-  /* type — hand lettering (headings) + handwriting (body) */
-  --font-lettering: 'Patrick Hand SC', 'Comic Sans MS', sans-serif;
-  --font-hand: 'Patrick Hand', 'Comic Sans MS', sans-serif;
-  --text-base: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
-  --text-h2: clamp(2rem, 1.5rem + 2vw, 3rem);
-  --text-hero: clamp(3rem, 1.8rem + 5.5vw, 6.5rem);
-
-  /* spacing */
+  --paper: #f5f1e8;
+  --surface: rgba(255, 253, 247, 0.88);
+  --surface-solid: #fffdf7;
+  --ink: #1f2b27;
+  --muted: #66736d;
+  --forest: #315944;
+  --moss: #7b9d83;
+  --sunset: #c98455;
+  --sky: #dce9e5;
+  --border: 1px solid rgba(49, 89, 68, 0.18);
+  --shadow: 0 1.2rem 3rem rgba(31, 43, 39, 0.09);
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.15rem);
+  --text-h2: clamp(2rem, 1.6rem + 2vw, 3.4rem);
+  --text-hero: clamp(3.2rem, 2.1rem + 6vw, 7.4rem);
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 2rem;
   --space-4: 4rem;
-  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
-
-  /* comic panel treatment */
-  --line: 3px solid var(--ink);
-  /* asymmetric radii ≈ hand-drawn wobble on panel borders */
-  --wobble: 255px 15px 225px 15px / 15px 225px 15px 255px;
-
+  --space-section: clamp(4.5rem, 4rem + 5vw, 8rem);
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --content-width: 72rem;
   --duration: 300ms;
-  --content-width: 64rem;
 }
-
-/* ---- reset-ish base ---- */
 
 *,
 *::before,
@@ -49,68 +38,67 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(220, 233, 229, 0.8), transparent 26rem),
+    var(--paper);
   color: var(--ink);
-  font-family: var(--font-hand);
+  font-family: var(--font-body);
   font-size: var(--text-base);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-lettering);
-  font-weight: 400; /* the SC face is already bold-feeling; browser-bold distorts it */
-  line-height: 1.1;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   margin: 0 0 var(--space-2);
 }
 
 h1 {
   font-size: var(--text-hero);
+  max-width: 8ch;
 }
 
 h2 {
+  color: var(--forest);
   font-size: var(--text-h2);
-  display: inline-block;
-  border-bottom: var(--line);
-  border-radius: var(--wobble);
-  padding: 0 var(--space-2) var(--space-1);
+}
+
+h3 {
+  font-size: clamp(1.35rem, 1.2rem + 0.55vw, 1.8rem);
 }
 
 p {
   margin: 0 0 var(--space-2);
-  max-width: 60ch;
+  max-width: 65ch;
 }
 
 a {
-  color: var(--accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  color: var(--forest);
+  text-underline-offset: 0.2em;
 }
 
 a:hover {
-  color: var(--ink);
-  background: var(--tiger);
-  text-decoration: none;
+  color: var(--sunset);
 }
 
 :focus-visible {
-  outline: 3px dashed var(--accent);
-  outline-offset: 3px;
+  outline: 3px solid var(--sunset);
+  outline-offset: 4px;
 }
-
-/* ---- layout shell ---- */
 
 .skip-link {
   position: absolute;
   left: -999px;
   top: 0;
-  background: var(--ink);
-  color: var(--paper);
-  padding: var(--space-1) var(--space-2);
   z-index: 100;
+  background: var(--forest);
+  color: var(--surface-solid);
+  padding: var(--space-1) var(--space-2);
 }
 
 .skip-link:focus {
@@ -121,107 +109,165 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--paper);
-  border-bottom: var(--line);
+  background: rgba(245, 241, 232, 0.9);
+  border-bottom: var(--border);
+  backdrop-filter: blur(0.8rem);
 }
 
 .site-nav {
+  display: flex;
+  gap: 0.5rem 1.5rem;
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: var(--space-1) var(--space-2);
-  display: flex;
-  gap: var(--space-2) var(--space-3);
-  flex-wrap: wrap;
-  font-family: var(--font-lettering);
-  font-size: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.site-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .site-nav a {
-  color: var(--ink);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .site-nav a:hover {
-  color: var(--accent);
-  background: none;
+  color: var(--forest);
 }
 
 main {
   display: block;
+  overflow: clip;
 }
 
 .section {
   max-width: var(--content-width);
-  margin: 0 auto;
-  padding: var(--space-section) var(--space-2);
   min-height: 60vh;
+  margin: 0 auto;
+  padding: var(--space-section) 1.25rem;
 }
 
-/* hand-drawn comic panel */
-.panel {
-  background: var(--panel);
-  border: var(--line);
-  border-radius: var(--wobble);
-  padding: var(--space-3);
+.section > h2 {
+  margin-bottom: var(--space-3);
 }
-
-.placeholder-note {
-  color: var(--ink-soft);
-  font-style: italic;
-}
-
-/* ---- hero ---- */
 
 .section--hero {
-  min-height: 88vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+  min-height: calc(100svh - 3.4rem);
+  padding-top: clamp(3rem, 6vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 7rem);
 }
 
 .hero-text {
   position: relative;
   z-index: 1;
-  max-width: 34rem;
-}
-
-.hero-visual {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(48%, 34rem);
-}
-
-@media (max-width: 48rem) {
-  .hero-visual {
-    width: 100%;
-    opacity: 0.3;
-    z-index: 0;
-  }
 }
 
 .hero-kicker {
-  font-family: var(--font-lettering);
-  font-size: 1.4rem;
-  color: var(--ink-soft);
-  margin-bottom: 0;
+  color: var(--forest);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .hero-tagline {
-  font-size: 1.35rem;
-  color: var(--ink-soft);
+  color: var(--muted);
+  font-size: clamp(1.1rem, 1rem + 0.55vw, 1.45rem);
+  max-width: 34rem;
 }
 
-/* ---- experience timeline ---- */
+.hero-landscape {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(19rem, 44vw, 34rem);
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--sky) 0%, #b6d2c7 57%, #e8d1b2 100%);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.hero-sun {
+  position: absolute;
+  top: 13%;
+  right: 16%;
+  width: clamp(3rem, 9vw, 7rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f2c987;
+  box-shadow: 0 0 3rem rgba(242, 201, 135, 0.55);
+}
+
+.hero-mountain {
+  position: absolute;
+  right: -8%;
+  bottom: 21%;
+  left: -8%;
+  height: 55%;
+  clip-path: polygon(0 100%, 0 78%, 16% 52%, 29% 72%, 47% 25%, 63% 65%, 80% 40%, 100% 75%, 100% 100%);
+}
+
+.hero-mountain--far {
+  z-index: -2;
+  background: rgba(80, 123, 110, 0.5);
+  transform: translateY(0.5rem) scale(1.08);
+}
+
+.hero-mountain--near {
+  z-index: -1;
+  bottom: 11%;
+  height: 57%;
+  background: var(--forest);
+  clip-path: polygon(0 100%, 0 73%, 21% 44%, 36% 68%, 53% 32%, 70% 70%, 84% 48%, 100% 72%, 100% 100%);
+}
+
+.hero-trail {
+  position: absolute;
+  right: 28%;
+  bottom: -9%;
+  left: 28%;
+  height: 48%;
+  z-index: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(225, 189, 137, 0.9) 49%, transparent 100%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  opacity: 0.8;
+}
+
+.panel {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0.6rem 2rem rgba(31, 43, 39, 0.05);
+  padding: clamp(1.25rem, 2vw, 2rem);
+}
+
+.placeholder-note {
+  color: var(--muted);
+  font-style: italic;
+}
 
 .timeline {
+  display: grid;
+  gap: var(--space-3);
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: var(--space-3);
+}
+
+.timeline-item {
+  border-left: 0.3rem solid var(--moss);
 }
 
 .timeline-item h3 {
@@ -229,13 +275,14 @@ main {
 }
 
 .timeline-role {
-  font-family: var(--font-lettering);
-  font-size: 1.2rem;
-  color: var(--accent);
+  color: var(--forest);
+  font-weight: 700;
 }
 
-.timeline-period {
-  color: var(--ink-soft);
+.timeline-period,
+.card-venue {
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .timeline-item ul {
@@ -247,86 +294,38 @@ main {
   margin-bottom: var(--space-1);
 }
 
-/* ---- work cards ---- */
-
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: var(--space-3);
 }
 
 .card-kind {
-  font-family: var(--font-lettering);
-  color: var(--tiger);
+  color: var(--sunset);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   margin-bottom: var(--space-1);
+  text-transform: uppercase;
 }
 
 .card-venue {
   font-style: italic;
-  color: var(--ink-soft);
 }
 
-/* ---- contact ---- */
-
 .contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-3);
-  font-family: var(--font-lettering);
-  font-size: 1.3rem;
 }
 
-/* ---- character stage ---- */
-
-.character-stage {
-  position: fixed;
-  right: clamp(0.5rem, 3vw, 3rem);
-  bottom: 0.5rem;
-  z-index: 5;
-  pointer-events: none;
-  transition: transform var(--duration) ease-out;
+.contact-links a {
+  font-weight: 700;
 }
 
-.character-pose {
-  animation: pose-enter 500ms ease-out both;
-}
-
-.character-pose img,
-.character-pose video {
-  max-width: clamp(7rem, 18vw, 15rem);
-  height: auto;
-  display: block;
-}
-
-.standin-duo {
-  text-align: center;
-}
-
-.standin-caption {
-  font-family: var(--font-lettering);
-  font-size: 1rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-@keyframes pose-enter {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem) rotate(-4deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ---- scroll reveals ---- */
-
-/* Content is visible by default; the hook adds .reveal-pending, then removes it
-   on intersection. If JS/IntersectionObserver never runs, nothing is ever hidden. */
 .reveal {
   transition:
     opacity 600ms ease-out,
@@ -338,7 +337,36 @@ main {
   transform: translateY(1rem);
 }
 
-/* ---- motion floor ---- */
+@media (min-width: 64rem) {
+  .site-nav,
+  .section {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .section--hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 4rem;
+  }
+
+  .hero-landscape {
+    min-height: clamp(15rem, 70vw, 24rem);
+  }
+}
+
+@media (max-width: 30rem) {
+  .section {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .panel {
+    padding: 1.1rem;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {

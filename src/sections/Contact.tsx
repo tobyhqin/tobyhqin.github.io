@@ -1,4 +1,4 @@
-import { links } from '../data/content'
+import { bio, links } from '../data/content'
 
 export function Contact() {
   return (
@@ -7,7 +7,7 @@ export function Contact() {
         Contact
       </h2>
       <div className="panel reveal">
-        <p>Come explore with me:</p>
+        <p>{bio.contactIntro}</p>
         <ul className="contact-links">
           {links.map((link) => (
             <li key={link.label}>
