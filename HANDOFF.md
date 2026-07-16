@@ -4,8 +4,23 @@
 > New session: read `AGENTS.md` first (especially the Design Contract and the
 > "how this project got burned" section), then `PLAN.md`, then this.
 
-**Last session:** 2026-07-16 — scroll cinematics + design-review pass; **SITE IS
-LIVE at https://tobyhqin.github.io** (verified with agent-browser screenshots).
+**Last session:** 2026-07-16 — scroll-scrubbed scenes + Toby's revision pass;
+**SITE IS LIVE at https://tobyhqin.github.io**.
+
+## Session-11 delta
+
+- **Scenes are scroll-CONTROLLED now** (commit a65f080 + this session): videos
+  never autoplay — scrolling scrubs `video.currentTime` through each chapter,
+  forward and backward (boomerang). Logic in `SceneChapter.tsx` +
+  `components/scrollScrub.ts` (has a unit-test reproducer). Verified live:
+  t=0.00 at rest → 5.01 scrolled → reverses to 1.67 scrolling back.
+- **3D wagon + three.js fully removed** (Toby's call — hero is name + tagline
+  over the scrubbed tumble scene). Runtime deps now exactly react + react-dom.
+- Copy de-AI'd by Toby (nonchalant tagline/about, "Find me here:"); hero kicker
+  gone. Keep this voice — don't re-formalize it.
+- Contact panel repositioned into the open sky above the characters; the page's
+  final scroll beat is the clean walking-into-snow frame.
+- Verified: build green, wagon gone, scrub + boomerang live, contact clear.
 
 ## Session-9 delta — go-live debugging (read if deploys break again)
 
