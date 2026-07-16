@@ -1,20 +1,22 @@
-import { bio } from '../data/content'
+import { HeroScene } from '../components/SceneMedia'
+import { scenes, site } from '../data/content'
 
 export function Hero() {
+  const scene = scenes[0]
+
   return (
-    <section id="hero" className="section section--hero" aria-labelledby="hero-heading">
-      <div className="hero-text">
-        <p className="hero-kicker reveal">{bio.kicker}</p>
-        <h1 id="hero-heading" className="reveal">
-          {bio.name}
-        </h1>
-        <p className="hero-tagline reveal">{bio.tagline}</p>
-      </div>
-      <div className="hero-landscape" aria-hidden="true">
-        <span className="hero-sun" />
-        <span className="hero-mountain hero-mountain--far" />
-        <span className="hero-mountain hero-mountain--near" />
-        <span className="hero-trail" />
+    <section id="hero" className="hero" aria-labelledby="hero-heading">
+      <HeroScene />
+      <div className="hero-scrim" aria-hidden="true" />
+      <div className="hero-copy">
+        <p className="hero-eyebrow">
+          <span>{scene.number}</span> {site.eyebrow}
+        </p>
+        <h1 id="hero-heading">{site.name}</h1>
+        <p className="hero-tagline">{site.tagline}</p>
+        <a className="hero-action" href="#about">
+          {site.heroAction} <span aria-hidden="true">↓</span>
+        </a>
       </div>
     </section>
   )
