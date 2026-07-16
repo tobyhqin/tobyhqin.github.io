@@ -3,7 +3,7 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — BFF advocacy correction + contact cleanup.
+**Last session:** 2026-07-16 — custom headshot favicon.
 **SITE IS LIVE at https://tobyhqin.github.io**, but the current local commits have
 not been pushed; pushing still needs Toby's explicit approval.
 
@@ -33,6 +33,8 @@ not been pushed; pushing still needs Toby's explicit approval.
   Johnson and Family Professor of Services Marketing Emeritus.
 - Contact shows LinkedIn, GitHub, and Instagram as links on one row, then
   `toby@bffofamerica.org` as plain text with no `mailto:` link.
+- `public/favicon.png` is a 128×128 face crop from Toby's supplied headshot;
+  `index.html` references it directly and the old Vite SVG is removed.
 
 ## Verification
 

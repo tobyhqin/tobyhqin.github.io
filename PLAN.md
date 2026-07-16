@@ -36,6 +36,7 @@ reading/Calvin pointing (about), red wagon downhill (experience), Spaceman Spiff
       contact email.
 - [x] Mobile scene persistence (2026-07-16): seeks wait for decoded data and no
       longer overlap; large mobile panel gaps keep each sticky scene visible.
+- [x] Custom headshot favicon (2026-07-16).
 
 ## Asset ledger (what exists, what's replaceable)
 
@@ -57,5 +58,4 @@ all-intra H.264 for exact seeks, poster = frame 0).
 |---|---|
 | Toby: real-iPhone sign-off on the mobile scrub after deployment | current revision |
 | Optional: regenerate contact scene (see ledger) | post-launch |
-| Custom favicon (still Vite default) | post-launch |
 | Cornell paper: link when a public preprint is available | post-launch |
