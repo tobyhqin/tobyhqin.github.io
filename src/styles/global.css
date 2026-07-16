@@ -161,6 +161,9 @@ a:hover {
 .chapter {
   position: relative;
   view-timeline: --chapter block;
+  /* scrub runway: every chapter gets real scroll distance so its video
+     scrubs deliberately instead of flying through in one wheel-flick */
+  min-height: 260svh;
 }
 
 .chapter-scene {
@@ -264,6 +267,13 @@ a:hover {
   .chapter-content--right .chapter-body {
     margin-right: clamp(1rem, 6vw, 6rem);
     margin-left: auto;
+  }
+
+  /* work: cards sit right, so Spiff shifts left — the cream gap this opens on
+     the right is invisible against the matched paper background */
+  #work .chapter-scene video,
+  #work .chapter-scene img {
+    transform: translateX(-14%);
   }
 }
 
@@ -381,12 +391,8 @@ a:hover {
    hand-drawn tilt; the hero copy floats away as you leave it. */
 
 @supports (animation-timeline: view()) {
-  .chapter-scene video,
-  .chapter-scene img {
-    animation: scene-drift linear both;
-    animation-timeline: --chapter;
-  }
-
+  /* NOTE: no animation on the scene video — scroll-scrubbing is its only
+     motion; a CSS zoom on top made the scrub feel misaligned */
   .chapter-title {
     animation: title-in linear both;
     animation-timeline: view();
@@ -397,15 +403,6 @@ a:hover {
     animation: hero-away linear both;
     animation-timeline: view();
     animation-range: exit 0% exit 90%;
-  }
-}
-
-@keyframes scene-drift {
-  from {
-    transform: scale(1.12) translateY(2.5vh);
-  }
-  to {
-    transform: scale(1) translateY(-2.5vh);
   }
 }
 

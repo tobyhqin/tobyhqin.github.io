@@ -63,11 +63,13 @@ export function SceneChapter({ id, align = 'center', children }: Props) {
         ) : (
           <video
             ref={videoRef}
-            src={`/media/scenes/${id}.webm`}
+            /* all-intra mp4: every frame is a keyframe, so scrub seeks land
+               frame-exact and instantly; preload=auto keeps seeks buffer-hit */
+            src={`/media/scenes/${id}.mp4`}
             poster={`/media/scenes/${id}.webp`}
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
           />
         )}
       </div>

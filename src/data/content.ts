@@ -24,12 +24,12 @@ export type ContactLink = {
 export const bio = {
   name: 'Toby Qin',
   tagline:
-    'I create opportunities at BFFA and spend the rest of my time researching whatever catches my attention.',
+    'I create opportunities at BFF of America and spend the rest of my time researching whatever catches my attention.',
   about: [
     `I'm a student at East Chapel Hill High School, where I split my time between
      econometrics, microbiology, and teaching financial literacy.`,
-    `I lead North Carolina DECA, co-founded BFFA, and spend my summers doing research
-     at UC Santa Cruz. Outside of that, I fence saber and tutor SAT math.`,
+    `I lead North Carolina DECA, co-founded BFF of America, and spend my summers doing
+     research at UC Santa Cruz. Outside of that, I fence saber and tutor SAT math.`,
   ],
 }
 
@@ -122,7 +122,7 @@ export const works: WorkItem[] = [
       'A 16-lesson career and technical leadership course plus a volunteer mentorship hub — 800+ combined users.',
   },
   {
-    title: 'BFFA financial literacy curriculum',
+    title: 'BFF of America financial literacy curriculum',
     kind: 'project',
     description:
       'A 4-week financial literacy curriculum for grades 6-12 with targeted K-5 lessons, built on the CEE National Standards — taught to 300+ students in 7 states.',
