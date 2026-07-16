@@ -3,24 +3,30 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — eased scene scrubbing + curated content refresh.
-**SITE IS LIVE at https://tobyhqin.github.io**, but this session's commit is local
-until Toby explicitly approves a push.
+**Last session:** 2026-07-16 — mobile scene persistence + Projects & Papers correction.
+**SITE IS LIVE at https://tobyhqin.github.io**, but the current local commits have
+not been pushed; pushing still needs Toby's explicit approval.
 
 ## Current state
 
 - Five full-screen Calvin & Hobbes scene chapters remain exactly as contracted:
   Hero → About → Experience → Projects & Papers → Contact.
-- Scene videos are all-intra H.264 MP4s. Scroll still controls video time in both
-  directions, but `SceneChapter.tsx` now eases toward the target over successive
-  animation frames instead of hard-seeking once per wheel/touch delta.
-- `scrollScrub.ts` owns both the scroll mapping and refresh-rate-independent
-  smoothing. `test/scrollScrub.test.ts` covers mapping, clamping, and smoothing.
+- Scene videos are all-intra H.264 MP4s. `SceneChapter.tsx` waits for decoded
+  data, never replaces an in-flight seek, resumes from `seeked`, and uses a tiny
+  media fragment so paused iOS video has an initial frame.
+- Mobile Experience and Projects use `45svh` gaps between opaque panels. The
+  sticky scene remains fully visible between cards, and the extra chapter height
+  provides a longer touch-scrub runway.
+- `scrollScrub.ts` owns scroll mapping, refresh-rate-independent smoothing, and
+  the seek gate. Its tests cover mapping, clamping, smoothing, and seek gating.
 - Experience is exactly: NC DECA, BFF of America, UCSC SIP, Cornell SC Johnson,
   and NCYSS, in that order. Counts reflect Toby's 2026-07-16 Common App update.
 - Projects & Papers is exactly: FAFSA preprint (linked to SSRN), Cornell automatic-
-  gratuity paper, NC DECA app, NC DECA Blueprint/mentorship hub, and BFF personal-
-  finance app.
+  gratuity paper, NCYSS stormwater paper, ICE IGSA study, and NC DECA app. The app
+  description is present tense and identifies 2,000+ users plus event selection
+  across levels of competition.
+- The Projects scene is translated `-18%` on desktop so Calvin and stuffed Hobbes
+  sit fully left of the card columns.
 - Michael Lynn's current official Cornell wording is reflected as Michael D.
   Johnson and Family Professor of Services Marketing Emeritus.
 - Contact shows LinkedIn, GitHub, ORCID, and Instagram as links, then
@@ -28,16 +34,17 @@ until Toby explicitly approves a push.
 
 ## Verification
 
-- `npm test`: 3/3 passed.
-- `npm run test:coverage`: 100% for `scrollScrub.ts`.
+- `npm test`: 5/5 passed.
+- `npm run test:coverage`: 100% for `scrollScrub.ts` and `content.ts`.
 - `npm run lint`: passed.
 - `npm run build`: passed.
+- `npm audit --audit-level=high`: 0 vulnerabilities.
 - Agent-browser screenshots inspected for all five chapters at 1440×900 and
-  375×812. No horizontal overflow or page errors; all five videos reached
-  `readyState = 4`.
-- Live timing sample: a wheel-sized hero jump produced 23 intermediate video
-  times over 24 animation frames, monotonically approaching the target.
-- Reduced-motion check renders five posters and zero videos.
+  375×812. No horizontal overflow, page errors, or console errors. Mobile scene
+  gaps compute to 365.4px at the tested 812px viewport.
+- Mobile timing sample produced 21 distinct video times during one smooth scroll,
+  then settled exactly on target at `readyState = 4` with no pending seek.
+- Reduced-motion check renders five posters, zero videos, and no hidden reveals.
 
 ## Deploy gotchas
 

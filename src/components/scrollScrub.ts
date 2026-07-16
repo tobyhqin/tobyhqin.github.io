@@ -13,3 +13,7 @@ export function scrollScrubTime(
 export function smoothScrubTime(current: number, target: number, elapsedMs: number): number {
   return target + (current - target) * Math.exp(-Math.max(0, elapsedMs) / 90)
 }
+
+export function shouldSeekVideo(current: number, target: number, seeking: boolean): boolean {
+  return !seeking && Math.abs(current - target) > 1 / 60
+}

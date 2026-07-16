@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { scrollScrubTime, smoothScrubTime } from '../src/components/scrollScrub.ts'
+import {
+  scrollScrubTime,
+  shouldSeekVideo,
+  smoothScrubTime,
+} from '../src/components/scrollScrub.ts'
 
 test('maps chapter scroll to video time in either direction', () => {
   const duration = 5
@@ -32,4 +36,10 @@ test('smooths seek jumps consistently across refresh rates', () => {
   for (let frame = 0; frame < 5; frame += 1) at30Hz = smoothScrubTime(at30Hz, 5, 32)
 
   assert.ok(Math.abs(at60Hz - at30Hz) < 1e-10)
+})
+
+test('waits for the current seek and ignores sub-frame changes', () => {
+  assert.equal(shouldSeekVideo(1, 2, true), false)
+  assert.equal(shouldSeekVideo(1, 1 + 1 / 120, false), false)
+  assert.equal(shouldSeekVideo(1, 2, false), true)
 })

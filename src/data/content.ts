@@ -102,21 +102,24 @@ export const works: WorkItem[] = [
     venue: 'Working paper, Cornell SC Johnson College of Business',
   },
   {
+    title: 'Stormwater microbiome modeling',
+    kind: 'paper',
+    description:
+      'I use linear mixed-effects models to predict alpha-diversity measures in stormwater runoff and present the findings in a 29-page manuscript.',
+    venue: 'Submitted to Microbiology Spectrum',
+  },
+  {
+    title: 'ICE IGSA facility expansion study',
+    kind: 'paper',
+    description:
+      'With Sajad Tahavori, I examine the relationship between ICE IGSA detention-facility expansion and local demographic and employment outcomes.',
+    venue: 'Working paper, UC Santa Cruz',
+  },
+  {
     title: 'NC DECA app',
     kind: 'project',
-    description: 'I rebuilt NC DECA’s app as a competition-prep tool for members across the state.',
-  },
-  {
-    title: 'NC DECA Blueprint & mentorship hub',
-    kind: 'project',
     description:
-      'I launched a free 16-module professional-skills course and a volunteer mentorship hub. More than 500 members have used the course, and 300+ have used the hub.',
-  },
-  {
-    title: 'BFF of America personal-finance app',
-    kind: 'project',
-    description:
-      'I built a personal-finance learning app so students can work through practical lessons outside BFF of America’s live programs.',
+      'The NC DECA app serves 2,000+ users as a competition-prep tool, helping members compare events, choose the right event at different levels of competition, and prepare for each stage.',
   },
 ]
 

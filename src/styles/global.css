@@ -229,6 +229,11 @@ a:hover {
     object-position: center 82%;
   }
 
+  .chapter-body .timeline,
+  .chapter-body .card-grid {
+    row-gap: 45svh;
+  }
+
   .chapter-lead--hero {
     justify-content: flex-start;
     padding-top: 5.5rem;
@@ -273,7 +278,7 @@ a:hover {
      the right is invisible against the matched paper background */
   #work .chapter-scene video,
   #work .chapter-scene img {
-    transform: translateX(-14%);
+    transform: translateX(-18%);
   }
 }
 
@@ -468,5 +473,10 @@ a:hover {
   .chapter-title,
   .chapter-lead--hero {
     animation: none !important;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
   }
 }

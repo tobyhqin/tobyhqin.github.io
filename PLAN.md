@@ -32,7 +32,10 @@ reading/Calvin pointing (about), red wagon downhill (experience), Spaceman Spiff
 - [x] Scroll-scrub hardening (2026-07-16): all-intra H.264 scene assets, proper
       chapter runway, and time-based smoothing for forward/reverse scrubbing.
 - [x] Content refresh (2026-07-16): five requested experience entries, FAFSA and
-      Cornell papers, three requested projects, and plain-text contact email.
+      Cornell, NCYSS, and ICE papers, the 2,000+ user NC DECA app, and plain-text
+      contact email.
+- [x] Mobile scene persistence (2026-07-16): seeks wait for decoded data and no
+      longer overlap; large mobile panel gaps keep each sticky scene visible.
 
 ## Asset ledger (what exists, what's replaceable)
 
@@ -52,7 +55,7 @@ all-intra H.264 for exact seeks, poster = frame 0).
 
 | Item | Needed by |
 |---|---|
-| Toby: real-browser sign-off on the eased scrub | current revision |
+| Toby: real-iPhone sign-off on the mobile scrub after deployment | current revision |
 | Optional: regenerate contact scene (see ledger) | post-launch |
 | Custom favicon (still Vite default) | post-launch |
 | Cornell paper: link when a public preprint is available | post-launch |

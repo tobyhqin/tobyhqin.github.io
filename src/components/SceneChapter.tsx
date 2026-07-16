@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
-import { scrollScrubTime, smoothScrubTime } from './scrollScrub'
+import { scrollScrubTime, shouldSeekVideo, smoothScrubTime } from './scrollScrub'
 
 /**
  * A full-viewport comic scene chapter. The scene video is sticky and fills the
@@ -30,24 +30,27 @@ export function SceneChapter({ id, align = 'center', children }: Props) {
     let previousTimestamp = 0
     const update = (timestamp: number) => {
       frame = 0
-      if (!Number.isFinite(video.duration) || video.duration <= 0) return
+      if (
+        video.readyState < 2 ||
+        !Number.isFinite(video.duration) ||
+        video.duration <= 0 ||
+        video.seeking
+      )
+        return
 
       const bounds = chapter.getBoundingClientRect()
       const target = scrollScrubTime(bounds.top, bounds.height, innerHeight, video.duration)
       if (!initialized) {
-        video.currentTime = target
         initialized = true
+        if (shouldSeekVideo(video.currentTime, target, video.seeking)) video.currentTime = target
         return
       }
+
+      if (!shouldSeekVideo(video.currentTime, target, video.seeking)) return
 
       const next = smoothScrubTime(video.currentTime, target, timestamp - previousTimestamp)
       previousTimestamp = timestamp
-      if (Math.abs(next - target) <= 1 / 60) {
-        video.currentTime = target
-        return
-      }
-
-      video.currentTime = next
+      video.currentTime = Math.abs(next - target) <= 1 / 60 ? target : next
       frame = requestAnimationFrame(update)
     }
     const scheduleUpdate = () => {
@@ -58,13 +61,15 @@ export function SceneChapter({ id, align = 'center', children }: Props) {
     }
 
     video.pause()
-    video.addEventListener('loadedmetadata', scheduleUpdate)
+    video.addEventListener('loadeddata', scheduleUpdate)
+    video.addEventListener('seeked', scheduleUpdate)
     addEventListener('scroll', scheduleUpdate, { passive: true })
     addEventListener('resize', scheduleUpdate)
     scheduleUpdate()
 
     return () => {
-      video.removeEventListener('loadedmetadata', scheduleUpdate)
+      video.removeEventListener('loadeddata', scheduleUpdate)
+      video.removeEventListener('seeked', scheduleUpdate)
       removeEventListener('scroll', scheduleUpdate)
       removeEventListener('resize', scheduleUpdate)
       if (frame) cancelAnimationFrame(frame)
@@ -82,9 +87,9 @@ export function SceneChapter({ id, align = 'center', children }: Props) {
         ) : (
           <video
             ref={videoRef}
-            /* all-intra mp4: every frame is a keyframe, so scrub seeks land
-               frame-exact and instantly; preload=auto keeps seeks buffer-hit */
-            src={`/media/scenes/${id}.mp4`}
+            /* The media fragment makes the first decoded frame available on
+               paused iOS video before scroll-driven seeking begins. */
+            src={`/media/scenes/${id}.mp4#t=0.001`}
             poster={`/media/scenes/${id}.webp`}
             muted
             playsInline
