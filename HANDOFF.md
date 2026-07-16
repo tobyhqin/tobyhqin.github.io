@@ -4,8 +4,8 @@
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
 **Last session:** 2026-07-16 — custom headshot favicon.
-**SITE IS LIVE at https://tobyhqin.github.io**, but the current local commits have
-not been pushed; pushing still needs Toby's explicit approval.
+**SITE IS LIVE at https://tobyhqin.github.io**. The current revision is pushed to
+`main` and deploys through GitHub Actions.
 
 ## Current state
 
