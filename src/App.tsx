@@ -1,17 +1,24 @@
-import { SceneStack } from './components/SceneMedia'
-import { scenes, site } from './data/content'
-import { useActiveScene } from './hooks/useActiveScene'
+import { CharacterStage } from './components/CharacterStage'
+import { useActiveSection } from './hooks/useActiveSection'
+import { useRevealOnScroll } from './hooks/useRevealOnScroll'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
 import { Hero } from './sections/Hero'
 import { Work } from './sections/Work'
 
-const JOURNEY_SCENES = scenes.filter((scene) => scene.id !== 'hero')
-const JOURNEY_SCENE_IDS = JOURNEY_SCENES.map((scene) => scene.id)
+const SECTION_IDS = ['hero', 'about', 'experience', 'work', 'contact'] as const
+
+const NAV = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'work', label: 'Projects & Papers' },
+  { id: 'contact', label: 'Contact' },
+]
 
 function App() {
-  const activeScene = useActiveScene(JOURNEY_SCENE_IDS)
+  const activeSection = useActiveSection(SECTION_IDS)
+  useRevealOnScroll()
 
   return (
     <>
@@ -19,29 +26,22 @@ function App() {
         Skip to content
       </a>
       <header className="site-header">
-        <nav className="site-nav" aria-label="Primary navigation">
-          <a className="wordmark" href="#hero">
-            {site.name}
-          </a>
-          <a className="nav-contact" href="#contact">
-            {site.contactAction} <span aria-hidden="true">↘</span>
-          </a>
+        <nav className="site-nav" aria-label="Sections">
+          {NAV.map(({ id, label }) => (
+            <a key={id} href={`#${id}`}>
+              {label}
+            </a>
+          ))}
         </nav>
       </header>
       <main id="main">
         <Hero />
-        <div className="journey-shell">
-          <aside className="journey-media" aria-label="Visual journey">
-            <SceneStack activeId={activeScene} items={JOURNEY_SCENES} />
-          </aside>
-          <div className="journey-copy">
-            <About />
-            <Experience />
-            <Work />
-            <Contact />
-          </div>
-        </div>
+        <About />
+        <Experience />
+        <Work />
+        <Contact />
       </main>
+      <CharacterStage activeSection={activeSection} />
     </>
   )
 }
