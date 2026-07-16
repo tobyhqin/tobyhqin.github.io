@@ -28,7 +28,11 @@ jobs:
             tail -n 30 /tmp/ci.log | while IFS= read -r line; do echo "::error::${line}"; done
             exit 1
           }
-      - run: npm run build
+      - run: |
+          npm run build 2>&1 | tee /tmp/build.log || {
+            tail -n 30 /tmp/build.log | while IFS= read -r line; do echo "::error::${line}"; done
+            exit 1
+          }
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
