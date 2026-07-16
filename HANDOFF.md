@@ -4,8 +4,8 @@
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
 **Last session:** 2026-07-16 — Hero/About copy + centered headshot favicon.
-**SITE IS LIVE at https://tobyhqin.github.io**. The current revision is local and
-has not been pushed.
+**SITE IS LIVE at https://tobyhqin.github.io**. The current revision is pushed to
+`main` and deploys through GitHub Actions.
 
 ## Current state
 
