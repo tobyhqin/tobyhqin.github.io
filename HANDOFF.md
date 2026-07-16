@@ -3,7 +3,7 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — BFF impact metrics update.
+**Last session:** 2026-07-16 — BFF advocacy correction + contact cleanup.
 **SITE IS LIVE at https://tobyhqin.github.io**, but the current local commits have
 not been pushed; pushing still needs Toby's explicit approval.
 
@@ -21,7 +21,8 @@ not been pushed; pushing still needs Toby's explicit approval.
   the seek gate. Its tests cover mapping, clamping, smoothing, and seek gating.
 - Experience is exactly: NC DECA, BFF of America, UCSC SIP, Cornell SC Johnson,
   and NCYSS, in that order. BFF's current impact bullet reports 10,000+ students,
-  500,000+ social media impressions, and 5,000+ collected items.
+  500,000+ social media impressions, and 5,000+ collected items. Its advocacy
+  bullet describes an Allen Buansi proposal planned for introduction next year.
 - Projects & Papers is exactly: FAFSA preprint (linked to SSRN), Cornell automatic-
   gratuity paper, NCYSS stormwater paper, ICE IGSA study, and NC DECA app. The app
   description is present tense and identifies 2,000+ users plus event selection
@@ -30,7 +31,7 @@ not been pushed; pushing still needs Toby's explicit approval.
   sit fully left of the card columns.
 - Michael Lynn's current official Cornell wording is reflected as Michael D.
   Johnson and Family Professor of Services Marketing Emeritus.
-- Contact shows LinkedIn, GitHub, ORCID, and Instagram as links, then
+- Contact shows LinkedIn, GitHub, and Instagram as links on one row, then
   `toby@bffofamerica.org` as plain text with no `mailto:` link.
 
 ## Verification

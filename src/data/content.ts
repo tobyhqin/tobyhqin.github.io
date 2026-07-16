@@ -51,7 +51,7 @@ export const experience: ExperienceItem[] = [
     bullets: [
       'Co-founded an international 501(c)(3) that has taught financial literacy to 1,700+ K-12 students through 40+ chapters in 15 states',
       'Impacted 10,000+ students, generated 500,000+ social media impressions, and collected 5,000+ items through community drives',
-      'Advocated for a bill that passed the North Carolina Senate to move personal-finance instruction earlier in school',
+      'Advocating for earlier personal-finance instruction through a legislative proposal with Allen Buansi, planned for introduction next year',
     ],
   },
   {
@@ -134,6 +134,5 @@ export const ui = {
 export const links: ContactLink[] = [
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/tobyq/' },
   { label: 'GitHub', url: 'https://github.com/tobyhqin' },
-  { label: 'ORCID', url: 'https://orcid.org/0009-0007-8119-4386' },
   { label: 'Instagram', url: 'https://instagram.com/toby.qin' },
 ]

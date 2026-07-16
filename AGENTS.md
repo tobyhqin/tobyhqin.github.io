@@ -42,7 +42,7 @@ GitHub Actions on push to `main`).
 | Sections | Exactly: Hero → About → Experience → Projects & Papers → Contact. No additions without Toby. |
 | Hero | Full-screen tumbling scene + name/tagline overlay. No separate 3D or corner accent; Toby explicitly removed the wagon on 2026-07-15. |
 | Scene assets | `public/media/scenes/<section>.mp4` + `.webp` poster. Sources: Toby's nano-banana-2 stills + Seedance/Gemini videos, processed via the pipeline in `docs/HIGGSFIELD.md` (color-match bg to #fbf6ea, all-intra H.264, ≤5 MB). Never replace with other imagery. |
-| Content | Curated only: ≤6 experience entries, ≤5 projects/papers, 2 bio paragraphs. Professional tone (college-app-grade). Contact exactly: LinkedIn, GitHub, ORCID, and Instagram links, then plain-text email (toby@bffofamerica.org). No footer text. |
+| Content | Curated only: ≤6 experience entries, ≤5 projects/papers, 2 bio paragraphs. Professional tone (college-app-grade). Contact exactly: LinkedIn, GitHub, and Instagram links, then plain-text email (toby@bffofamerica.org). No footer text. |
 | Palette | `--paper #fbf6ea` is load-bearing — every video bg is color-matched to it. Changing it breaks the full-bleed illusion everywhere. |
 
 ## Hard rules
