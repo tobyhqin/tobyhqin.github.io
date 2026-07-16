@@ -4,8 +4,28 @@
 > New session: read `AGENTS.md` first (especially the Design Contract and the
 > "how this project got burned" section), then `PLAN.md`, then this.
 
-**Last session:** 2026-07-15 (late) — nature redesign reverted; scene-scroll
-Calvin & Hobbes site built and verified.
+**Last session:** 2026-07-16 — scroll cinematics + design-review pass; deploy
+switched to the real Actions workflow.
+
+## Session-8 delta
+
+- Scroll-driven cinematics added (native CSS `animation-timeline`, no deps):
+  scene drift/zoom via a named `--chapter` view-timeline, title slap-in with
+  hand-drawn tilt, hero copy floats away on exit, springy staggered panel
+  reveals. 3D wagon wheels spin with scroll; wagon leans with scroll velocity.
+- Independent design-subagent review ran (verdict: SHIP WITH FIXES); all six
+  fixes applied — notably: the reveal fail-safe no longer disarms the panel
+  animation (clearTimeout on first IO callback), reduced-motion now removes
+  timeline animations outright (`animation: none`, since duration tricks don't
+  stop scroll-mapped progress), and `mix-blend-mode: multiply` on scenes melts
+  any residual bg mismatch into the paper (this replaced visible media edges).
+- Nav masthead solid paper + feather; mobile hero recomposed (copy top, scene
+  band low via `object-position`, smaller wagon); contact panel narrowed off
+  the characters; UI copy moved to `content.ts` (`ui` export).
+- Deferred nit (fine to add later): active-section underline in the nav.
+- Pages source was still "branch" at session start (site served raw repo!);
+  Toby flipped it — verify runs named **"Deploy to GitHub Pages"** (the
+  built-in "pages build and deployment" = wrong source setting).
 
 ## Current state
 
