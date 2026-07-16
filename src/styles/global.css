@@ -1,12 +1,15 @@
 /* ============================================================
    Design tokens — Calvin & Hobbes comic theme
    Newsprint paper, ink lines, hand lettering, wagon-red accent.
+   The five sections are full-viewport comic SCENES: a sticky
+   scene video fills the screen, content scrolls over it.
    ============================================================ */
 
 :root {
-  /* color */
-  --paper: #fbf6ea;        /* aged newsprint */
-  --panel: #fffdf7;        /* panel interior, slightly brighter than page */
+  /* color — --paper MUST stay #fbf6ea: every scene video's background is
+     color-matched to it, which is what makes the scenes look full-bleed */
+  --paper: #fbf6ea;
+  --panel: #fffdf7;
   --ink: #211d19;
   --ink-soft: #5c544c;
   --accent: #cf3f36;       /* the red wagon */
@@ -16,15 +19,14 @@
   --font-lettering: 'Patrick Hand SC', 'Comic Sans MS', sans-serif;
   --font-hand: 'Patrick Hand', 'Comic Sans MS', sans-serif;
   --text-base: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
-  --text-h2: clamp(2rem, 1.5rem + 2vw, 3rem);
-  --text-hero: clamp(3rem, 1.8rem + 5.5vw, 6.5rem);
+  --text-h2: clamp(2.6rem, 1.8rem + 3.5vw, 4.5rem);
+  --text-hero: clamp(3.2rem, 2rem + 6vw, 7rem);
 
   /* spacing */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 2rem;
   --space-4: 4rem;
-  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
 
   /* comic panel treatment */
   --line: 3px solid var(--ink);
@@ -71,14 +73,6 @@ h1 {
   font-size: var(--text-hero);
 }
 
-h2 {
-  font-size: var(--text-h2);
-  display: inline-block;
-  border-bottom: var(--line);
-  border-radius: var(--wobble);
-  padding: 0 var(--space-2) var(--space-1);
-}
-
 p {
   margin: 0 0 var(--space-2);
   max-width: 60ch;
@@ -118,18 +112,17 @@ a:hover {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
-  background: var(--paper);
-  border-bottom: var(--line);
 }
 
 .site-nav {
-  max-width: var(--content-width);
-  margin: 0 auto;
   padding: var(--space-1) var(--space-2);
   display: flex;
+  justify-content: center;
   gap: var(--space-2) var(--space-3);
   flex-wrap: wrap;
   font-family: var(--font-lettering);
@@ -146,72 +139,133 @@ a:hover {
   background: none;
 }
 
-main {
+/* ---- scene chapters ----
+   .chapter-scene is sticky and fills the viewport; .chapter-content is pulled
+   up over it with a negative margin. The first 100svh of content is the
+   "lead" (giant title over the clean scene); panels follow, scrolling over. */
+
+.chapter {
+  position: relative;
+}
+
+.chapter-scene {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.chapter-scene video,
+.chapter-scene img {
+  width: 100%;
+  height: 100%;
+  /* contain, never cover: scene bg is color-matched to --paper, so the
+     letterbox is invisible and the characters never crop on any viewport */
+  object-fit: contain;
   display: block;
 }
 
-.section {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: var(--space-section) var(--space-2);
-  min-height: 60vh;
-}
-
-/* hand-drawn comic panel */
-.panel {
-  background: var(--panel);
-  border: var(--line);
-  border-radius: var(--wobble);
-  padding: var(--space-3);
-}
-
-.placeholder-note {
-  color: var(--ink-soft);
-  font-style: italic;
-}
-
-/* ---- hero ---- */
-
-.section--hero {
-  min-height: 88vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.hero-text {
+.chapter-content {
   position: relative;
   z-index: 1;
-  max-width: 34rem;
+  margin-top: -100svh;
 }
 
-.hero-visual {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(48%, 34rem);
+.chapter-lead {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: clamp(4rem, 12vh, 8rem) clamp(1rem, 6vw, 5rem) 0;
+  pointer-events: none; /* the lead is display type over the scene */
 }
 
-@media (max-width: 48rem) {
-  .hero-visual {
-    width: 100%;
-    opacity: 0.3;
-    z-index: 0;
+.chapter-lead a {
+  pointer-events: auto;
+}
+
+.chapter-title {
+  font-size: var(--text-h2);
+  display: inline-block;
+  border-bottom: var(--line);
+  border-radius: var(--wobble);
+  padding: 0 var(--space-2) var(--space-1);
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+}
+
+.chapter-body {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-2) clamp(4rem, 15vh, 9rem);
+}
+
+/* hug one side so the scene's characters stay visible while content scrolls */
+@media (min-width: 64rem) {
+  .chapter-content--left .chapter-body {
+    margin-left: clamp(1rem, 6vw, 6rem);
   }
+
+  .chapter-content--right .chapter-body {
+    margin-right: clamp(1rem, 6vw, 6rem);
+    margin-left: auto;
+  }
+}
+
+/* hero variant: centered vertically, name is the display type */
+.chapter-lead--hero {
+  justify-content: center;
 }
 
 .hero-kicker {
   font-family: var(--font-lettering);
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.8rem);
   color: var(--ink-soft);
   margin-bottom: 0;
 }
 
 .hero-tagline {
-  font-size: 1.35rem;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
   color: var(--ink-soft);
+  max-width: 30ch;
+}
+
+.scroll-cue {
+  font-family: var(--font-lettering);
+  font-size: 2rem;
+  text-decoration: none;
+  margin-top: var(--space-3);
+  animation: cue-bob 1.6s ease-in-out infinite;
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+.hero-wagon {
+  position: absolute;
+  right: clamp(0.5rem, 4vw, 4rem);
+  bottom: 2rem;
+  width: clamp(9rem, 20vw, 16rem);
+  height: clamp(9rem, 20vw, 16rem);
+  z-index: 2;
+}
+
+/* ---- hand-drawn comic panel ---- */
+
+.panel {
+  background: var(--panel);
+  border: var(--line);
+  border-radius: var(--wobble);
+  padding: var(--space-3);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 12%, transparent);
 }
 
 /* ---- experience timeline ---- */
@@ -279,54 +333,10 @@ main {
   font-size: 1.3rem;
 }
 
-/* ---- character stage ---- */
+/* ---- scroll reveals ----
+   Content is visible by default; the hook adds .reveal-pending, then removes
+   it on intersection. If JS/IntersectionObserver never runs, nothing hides. */
 
-.character-stage {
-  position: fixed;
-  right: clamp(0.5rem, 3vw, 3rem);
-  bottom: 0.5rem;
-  z-index: 5;
-  pointer-events: none;
-  transition: transform var(--duration) ease-out;
-}
-
-.character-pose {
-  animation: pose-enter 500ms ease-out both;
-}
-
-.character-pose img,
-.character-pose video {
-  max-width: clamp(7rem, 18vw, 15rem);
-  height: auto;
-  display: block;
-}
-
-.standin-duo {
-  text-align: center;
-}
-
-.standin-caption {
-  font-family: var(--font-lettering);
-  font-size: 1rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-@keyframes pose-enter {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem) rotate(-4deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ---- scroll reveals ---- */
-
-/* Content is visible by default; the hook adds .reveal-pending, then removes it
-   on intersection. If JS/IntersectionObserver never runs, nothing is ever hidden. */
 .reveal {
   transition:
     opacity 600ms ease-out,

@@ -1,4 +1,20 @@
-# HIGGSFIELD.md — character asset generation
+# HIGGSFIELD.md — scene asset generation
+
+> **CURRENT PIPELINE (2026-07-15, scene-scroll design):** assets are full-screen
+> SCENE videos in `public/media/scenes/<section>.webm` + `.webp` poster.
+> 1. Toby generates a 16:9 still (nano banana 2) and a 5 s cyclic video from it
+>    (Gemini Omni / Seedance). Prompt constraints that matter: first frame =
+>    exactly the input still (no fade-in from black), static camera, characters
+>    anchored in place, steady ~2 s motion cycle, background unchanged.
+> 2. Processing (script pattern in repo history, session 2026-07-15): sample bg
+>    at (10,10) of frame 0 → ffmpeg `lutrgb` gains to map bg → `#fbf6ea` →
+>    `scale=1280:-2`, VP9 `-crf 41`, `-an` → poster = frame 0 as webp. ≤5 MB/file.
+> 3. Drop into `public/media/scenes/`, verify with agent-browser, commit.
+>
+> Everything below is the older corner-character workflow — superseded, kept for
+> the CLI setup notes and prompt language.
+
+# (superseded) character asset generation
 
 How the Calvin & Hobbes character assets get made and installed. The site works
 without any of these (ink-line SVG stand-ins render instead), so this can be done

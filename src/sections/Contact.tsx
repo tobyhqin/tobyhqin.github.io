@@ -1,23 +1,28 @@
+import { SceneChapter } from '../components/SceneChapter'
 import { links } from '../data/content'
 
 export function Contact() {
   return (
-    <section id="contact" className="section" aria-labelledby="contact-heading">
-      <h2 id="contact-heading" className="reveal">
-        Contact
-      </h2>
-      <div className="panel reveal">
-        <p>Come explore with me:</p>
-        <ul className="contact-links">
-          {links.map((link) => (
-            <li key={link.label}>
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+    <SceneChapter id="contact" align="left">
+      <div className="chapter-lead">
+        <h2 id="contact-heading" className="chapter-title">
+          Contact
+        </h2>
       </div>
-    </section>
+      <div className="chapter-body">
+        <div className="panel reveal">
+          <p>Come explore with me:</p>
+          <ul className="contact-links">
+            {links.map((link) => (
+              <li key={link.label}>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </SceneChapter>
   )
 }
