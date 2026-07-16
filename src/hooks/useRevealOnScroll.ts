@@ -8,8 +8,13 @@ import { useEffect } from 'react'
 export function useRevealOnScroll() {
   useEffect(() => {
     if (!('IntersectionObserver' in window)) return
+    // fail-safe (armed below): reveal everything if the observer never fires.
+    // The observer ALWAYS fires an initial callback when alive, which disarms it —
+    // so this only trips in throttled/embed renderers where IO is dead.
+    let failSafe: ReturnType<typeof setTimeout> | undefined
     const observer = new IntersectionObserver(
       (entries) => {
+        clearTimeout(failSafe)
         for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.remove('reveal-pending')
@@ -21,12 +26,15 @@ export function useRevealOnScroll() {
     )
     const elements = [...document.querySelectorAll('.reveal')]
     for (const el of elements) {
+      // stagger siblings: index among .reveal elements sharing a parent
+      const siblings = el.parentElement
+        ? [...el.parentElement.children].filter((c) => c.classList.contains('reveal'))
+        : [el]
+      ;(el as HTMLElement).style.setProperty('--reveal-i', String(siblings.indexOf(el)))
       el.classList.add('reveal-pending')
       observer.observe(el)
     }
-    // fail-safe: if the observer never fires (throttled renderer, embed quirks),
-    // reveal everything rather than leave the page hidden
-    const failSafe = setTimeout(() => {
+    failSafe = setTimeout(() => {
       for (const el of elements) el.classList.remove('reveal-pending')
     }, 2000)
     return () => {

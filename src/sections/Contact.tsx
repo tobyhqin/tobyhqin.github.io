@@ -1,5 +1,5 @@
 import { SceneChapter } from '../components/SceneChapter'
-import { links } from '../data/content'
+import { links, ui } from '../data/content'
 
 export function Contact() {
   return (
@@ -11,7 +11,7 @@ export function Contact() {
       </div>
       <div className="chapter-body">
         <div className="panel reveal">
-          <p>Come explore with me:</p>
+          <p>{ui.contactIntro}</p>
           <ul className="contact-links">
             {links.map((link) => (
               <li key={link.label}>

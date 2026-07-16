@@ -1,11 +1,13 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, Float, Outlines } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
-import type { Group } from 'three'
+import type { Group, Mesh } from 'three'
 
 /**
  * The one R3F scene: Calvin's red wagon, toon-shaded with ink outlines to match
- * the comic theme. Gentle float + mouse parallax; static under reduced motion.
+ * the comic theme. Gentle float + mouse parallax, and the wheels SPIN with
+ * page scroll (the wagon rides along as you leave the hero).
+ * Static under reduced motion.
  */
 
 const INK = '#211d19'
@@ -16,9 +18,15 @@ function prefersReducedMotion() {
   return matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-function Wheel({ position }: { position: [number, number, number] }) {
+function Wheel({
+  position,
+  spinRef,
+}: {
+  position: [number, number, number]
+  spinRef: (mesh: Mesh | null) => void
+}) {
   return (
-    <mesh position={position} rotation={[Math.PI / 2, 0, 0]}>
+    <mesh ref={spinRef} position={position} rotation={[Math.PI / 2, 0, 0]}>
       <cylinderGeometry args={[0.34, 0.34, 0.16, 24]} />
       <meshToonMaterial color={INK} />
       <mesh position={[0, 0.09, 0]}>
@@ -33,6 +41,9 @@ function Wagon() {
   const group = useRef<Group>(null)
   const pointer = useRef({ x: 0, y: 0 })
 
+  const wheels = useRef<Mesh[]>([])
+  const scroll = useRef({ y: 0, shown: 0 })
+
   useEffect(() => {
     if (prefersReducedMotion()) return
     const onMove = (e: PointerEvent) => {
@@ -41,8 +52,15 @@ function Wagon() {
         y: (e.clientY / innerHeight) * 2 - 1,
       }
     }
+    const onScroll = () => {
+      scroll.current.y = scrollY
+    }
     addEventListener('pointermove', onMove, { passive: true })
-    return () => removeEventListener('pointermove', onMove)
+    addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      removeEventListener('pointermove', onMove)
+      removeEventListener('scroll', onScroll)
+    }
   }, [])
 
   useFrame(() => {
@@ -50,7 +68,20 @@ function Wagon() {
     if (!g || prefersReducedMotion()) return
     g.rotation.y += (pointer.current.x * 0.4 - 0.6 - g.rotation.y) * 0.04
     g.rotation.x += (pointer.current.y * 0.15 - g.rotation.x) * 0.04
+
+    // wheels spin with scroll; the wagon leans into the ride
+    const s = scroll.current
+    const delta = s.y - s.shown
+    s.shown += delta * 0.12
+    for (const wheel of wheels.current) {
+      wheel.rotation.y = -s.shown * 0.02
+    }
+    g.rotation.z += (Math.max(-0.18, Math.min(0.18, delta * 0.0012)) - g.rotation.z) * 0.08
   })
+
+  const registerWheel = (mesh: Mesh | null) => {
+    if (mesh && !wheels.current.includes(mesh)) wheels.current.push(mesh)
+  }
 
   return (
     <group ref={group} rotation={[0, -0.6, 0]}>
@@ -66,10 +97,10 @@ function Wagon() {
         <meshToonMaterial color={RED} />
         <Outlines thickness={OUTLINE} color={INK} />
       </mesh>
-      <Wheel position={[-0.85, 0.2, 0.62]} />
-      <Wheel position={[0.85, 0.2, 0.62]} />
-      <Wheel position={[-0.85, 0.2, -0.62]} />
-      <Wheel position={[0.85, 0.2, -0.62]} />
+      <Wheel position={[-0.85, 0.2, 0.62]} spinRef={registerWheel} />
+      <Wheel position={[0.85, 0.2, 0.62]} spinRef={registerWheel} />
+      <Wheel position={[-0.85, 0.2, -0.62]} spinRef={registerWheel} />
+      <Wheel position={[0.85, 0.2, -0.62]} spinRef={registerWheel} />
       {/* handle */}
       <group position={[1.45, 0.45, 0]} rotation={[0, 0, -1.05]}>
         <mesh position={[0, 0.55, 0]}>

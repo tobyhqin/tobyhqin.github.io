@@ -133,6 +133,14 @@ export const works: WorkItem[] = [
   },
 ]
 
+export const ui = {
+  heroKicker: 'A comic strip about',
+  contactIntro: 'Come explore with me:',
+  paperTag: 'Paper',
+  projectTag: 'Project',
+  readPaper: 'Read the paper',
+}
+
 export const links: ContactLink[] = [
   { label: 'Email', url: 'mailto:toby@bffofamerica.org' },
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/tobyq/' },

@@ -1,5 +1,5 @@
 import { SceneChapter } from '../components/SceneChapter'
-import { works } from '../data/content'
+import { ui, works } from '../data/content'
 
 export function Work() {
   return (
@@ -13,13 +13,13 @@ export function Work() {
         <div className="card-grid">
           {works.map((work) => (
             <article key={work.title} className="panel card reveal">
-              <p className="card-kind">{work.kind === 'paper' ? '📄 Paper' : '🛠 Project'}</p>
+              <p className="card-kind">{work.kind === 'paper' ? ui.paperTag : ui.projectTag}</p>
               <h3>{work.title}</h3>
               <p>{work.description}</p>
               {work.venue && <p className="card-venue">{work.venue}</p>}
               {work.paperUrl && (
                 <p>
-                  <a href={work.paperUrl}>Read the paper</a>
+                  <a href={work.paperUrl}>{ui.readPaper}</a>
                 </p>
               )}
             </article>
