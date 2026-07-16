@@ -6,8 +6,7 @@
    ============================================================ */
 
 :root {
-  /* color — --paper MUST stay #fbf6ea: every scene video's background is
-     color-matched to it, which is what makes the scenes look full-bleed */
+  /* Base paper for the page chrome. Each chapter samples its own video paper. */
   --paper: #fbf6ea;
   --panel: #fffdf7;
   --ink: #211d19;
@@ -159,11 +158,41 @@ a:hover {
    "lead" (giant title over the clean scene); panels follow, scrolling over. */
 
 .chapter {
+  --chapter-paper: var(--paper);
+  --chapter-paper-texture: none;
   position: relative;
   view-timeline: --chapter block;
+  background-color: var(--chapter-paper);
+  background-image: var(--chapter-paper-texture);
+  background-repeat: repeat;
   /* scrub runway: every chapter gets real scroll distance so its video
      scrubs deliberately instead of flying through in one wheel-flick */
   min-height: 260svh;
+}
+
+#hero {
+  --chapter-paper: #f8f4e8;
+  --chapter-paper-texture: url('/media/scenes/paper/hero.png');
+}
+
+#about {
+  --chapter-paper: #f8f4e7;
+  --chapter-paper-texture: url('/media/scenes/paper/about.png');
+}
+
+#experience {
+  --chapter-paper: #f7f5e4;
+  --chapter-paper-texture: url('/media/scenes/paper/experience.png');
+}
+
+#work {
+  --chapter-paper: #f6f2e6;
+  --chapter-paper-texture: url('/media/scenes/paper/work.png');
+}
+
+#contact {
+  --chapter-paper: #faf7e6;
+  --chapter-paper-texture: url('/media/scenes/paper/contact.png');
 }
 
 .chapter-scene {
@@ -172,19 +201,19 @@ a:hover {
   height: 100svh;
   z-index: 0;
   overflow: hidden;
+  background-color: var(--chapter-paper);
+  background-image: var(--chapter-paper-texture);
+  background-repeat: repeat;
 }
 
 .chapter-scene video,
 .chapter-scene img {
   width: 100%;
   height: 100%;
-  /* contain, never cover: scene bg is color-matched to --paper, so the
-     letterbox is invisible and the characters never crop on any viewport */
+  /* contain, never cover: the sampled chapter paper hides the letterbox while
+     preserving every character on narrow and wide viewports */
   object-fit: contain;
   display: block;
-  /* multiply melts any residual bg mismatch into the paper — near-white
-     backgrounds disappear, ink and watercolor survive */
-  mix-blend-mode: multiply;
 }
 
 .chapter-content {
@@ -213,7 +242,7 @@ a:hover {
   border-bottom: var(--line);
   border-radius: var(--wobble);
   padding: 0 var(--space-2) var(--space-1);
-  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  background: color-mix(in srgb, var(--chapter-paper) 72%, transparent);
 }
 
 .chapter-body {
