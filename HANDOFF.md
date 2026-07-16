@@ -3,7 +3,7 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — mobile scene persistence + Projects & Papers correction.
+**Last session:** 2026-07-16 — BFF impact metrics update.
 **SITE IS LIVE at https://tobyhqin.github.io**, but the current local commits have
 not been pushed; pushing still needs Toby's explicit approval.
 
@@ -20,7 +20,8 @@ not been pushed; pushing still needs Toby's explicit approval.
 - `scrollScrub.ts` owns scroll mapping, refresh-rate-independent smoothing, and
   the seek gate. Its tests cover mapping, clamping, smoothing, and seek gating.
 - Experience is exactly: NC DECA, BFF of America, UCSC SIP, Cornell SC Johnson,
-  and NCYSS, in that order. Counts reflect Toby's 2026-07-16 Common App update.
+  and NCYSS, in that order. BFF's current impact bullet reports 10,000+ students,
+  500,000+ social media impressions, and 5,000+ collected items.
 - Projects & Papers is exactly: FAFSA preprint (linked to SSRN), Cornell automatic-
   gratuity paper, NCYSS stormwater paper, ICE IGSA study, and NC DECA app. The app
   description is present tense and identifies 2,000+ users plus event selection

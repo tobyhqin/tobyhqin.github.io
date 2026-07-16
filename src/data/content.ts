@@ -50,7 +50,7 @@ export const experience: ExperienceItem[] = [
     period: 'Jul 2025 – Present',
     bullets: [
       'Co-founded an international 501(c)(3) that has taught financial literacy to 1,700+ K-12 students through 40+ chapters in 15 states',
-      'Raised $50,000+ and organized drives that collected 3,000+ donated items',
+      'Impacted 10,000+ students, generated 500,000+ social media impressions, and collected 5,000+ items through community drives',
       'Advocated for a bill that passed the North Carolina Senate to move personal-finance instruction earlier in school',
     ],
   },
