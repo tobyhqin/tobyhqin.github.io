@@ -36,7 +36,7 @@ reading/Calvin pointing (about), red wagon downhill (experience), Spaceman Spiff
       contact email.
 - [x] Mobile scene persistence (2026-07-16): seeks wait for decoded data and no
       longer overlap; large mobile panel gaps keep each sticky scene visible.
-- [x] Custom headshot favicon (2026-07-16).
+- [x] Custom centered headshot favicon and refreshed Hero/About copy (2026-07-16).
 
 ## Asset ledger (what exists, what's replaceable)
 

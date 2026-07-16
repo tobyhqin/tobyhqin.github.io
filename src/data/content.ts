@@ -24,12 +24,13 @@ export type ContactLink = {
 export const bio = {
   name: 'Toby Qin',
   tagline:
-    'I create opportunities at BFF of America and spend the rest of my time researching whatever catches my attention.',
+    'Welcome to my portfolio! Scroll down to see a little more about me and what I do.',
   about: [
-    `I'm a student at East Chapel Hill High School, where I split my time between
-     econometrics, microbiology, and teaching financial literacy.`,
-    `I lead North Carolina DECA, co-founded BFF of America, and spend my summers doing
-     research at UC Santa Cruz. Outside of that, I fence saber and tutor SAT math.`,
+    `I'm currently a senior at East Chapel Hill HS in North Carolina. I'm also an
+     online student at the NC School of Science and Mathematics.`,
+    `I serve as the State President for NC DECA, President and Co-Founder of BFF of
+     America, and spend my summers doing research at UC Santa Cruz. Outside of academics,
+     I enjoy spending time with my dog Misty and going to the gym.`,
   ],
 }
 

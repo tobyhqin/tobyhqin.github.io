@@ -3,9 +3,9 @@
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
 > New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — custom headshot favicon.
-**SITE IS LIVE at https://tobyhqin.github.io**. The current revision is pushed to
-`main` and deploys through GitHub Actions.
+**Last session:** 2026-07-16 — Hero/About copy + centered headshot favicon.
+**SITE IS LIVE at https://tobyhqin.github.io**. The current revision is local and
+has not been pushed.
 
 ## Current state
 
@@ -33,8 +33,10 @@
   Johnson and Family Professor of Services Marketing Emeritus.
 - Contact shows LinkedIn, GitHub, and Instagram as links on one row, then
   `toby@bffofamerica.org` as plain text with no `mailto:` link.
-- `public/favicon.png` is a 128×128 face crop from Toby's supplied headshot;
-  `index.html` references it directly and the old Vite SVG is removed.
+- Hero welcomes visitors to the portfolio. About identifies East Chapel Hill HS,
+  NCSSM Online, NC DECA, BFF of America, UCSC research, Misty, and the gym.
+- `public/favicon-headshot.png` is a centered 128×128 face crop from Toby's
+  supplied headshot. Its new filename avoids stale browser favicon caches.
 
 ## Verification
 
