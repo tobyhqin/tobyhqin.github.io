@@ -23,7 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 
-# agent tooling (local only, not part of the site)
+# AI agent tooling and working notes (local only)
 .agents/
-.claude/skills/
+.claude/
+.codex/
+.hallmark/
+.cursor/
+.windsurf/
 skills-lock.json
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+HANDOFF.md
+PLAN.md
+docs/NATURE-EXPLORATION.md
