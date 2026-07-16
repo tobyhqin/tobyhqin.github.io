@@ -1,6 +1,6 @@
 /* ============================================================
    Design tokens — Calvin & Hobbes comic theme
-   Newsprint paper, ink lines, hand lettering, wagon-red accent.
+   Newsprint paper, ink lines, hand lettering, red accent.
    The five sections are full-viewport comic SCENES: a sticky
    scene video fills the screen, content scrolls over it.
    ============================================================ */
@@ -12,7 +12,7 @@
   --panel: #fffdf7;
   --ink: #211d19;
   --ink-soft: #5c544c;
-  --accent: #cf3f36;       /* the red wagon */
+  --accent: #cf3f36;       /* Calvin's red shirt / wagon red */
   --tiger: #e8862e;        /* Hobbes orange, secondary accent */
 
   /* type — hand lettering (headings) + handwriting (body) */
@@ -47,6 +47,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -234,17 +235,18 @@ a:hover {
     font-size: 1.05rem;
   }
 
-  .hero-wagon {
-    width: clamp(6rem, 22vw, 8rem);
-    height: clamp(6rem, 22vw, 8rem);
-    right: 0.75rem;
-    bottom: 0.5rem;
-  }
 }
 
-/* contact panel hugs the empty lower-left of the snow scene */
+/* Contact copy sits in the open sky, above Calvin and Hobbes. The extra
+   chapter height lets the final scene scrub all the way to its last frame. */
+#contact {
+  min-height: 200svh;
+}
+
 #contact .chapter-body {
   max-width: 30rem;
+  margin-top: -68svh;
+  padding-top: var(--space-3);
 }
 
 @media (min-width: 64rem) {
@@ -270,13 +272,6 @@ a:hover {
   justify-content: center;
 }
 
-.hero-kicker {
-  font-family: var(--font-lettering);
-  font-size: clamp(1.2rem, 1rem + 1vw, 1.8rem);
-  color: var(--ink-soft);
-  margin-bottom: 0;
-}
-
 .hero-tagline {
   font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
   color: var(--ink-soft);
@@ -299,15 +294,6 @@ a:hover {
   50% {
     transform: translateY(0.5rem);
   }
-}
-
-.hero-wagon {
-  position: absolute;
-  right: clamp(0.5rem, 4vw, 4rem);
-  bottom: 2rem;
-  width: clamp(9rem, 20vw, 16rem);
-  height: clamp(9rem, 20vw, 16rem);
-  z-index: 2;
 }
 
 /* ---- hand-drawn comic panel ---- */

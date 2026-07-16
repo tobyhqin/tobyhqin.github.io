@@ -40,7 +40,7 @@ GitHub Actions on push to `main`).
 | Theme | **Calvin & Hobbes comic strip.** Real C&H imagery (Toby's explicit call, risk accepted 2026-07-15). Newsprint cream paper, ink lines, hand lettering (Patrick Hand / Patrick Hand SC), wagon-red + Hobbes-orange accents. |
 | Layout | **Full-screen scene chapters.** Each of the 5 sections is a full-viewport C&H scene video (sticky, `object-fit: contain`, bg color-matched to `--paper #fbf6ea`) with the giant hand-lettered title over it and content panels that scroll over the scene, hugging the scene's empty side. Implemented in `src/components/SceneChapter.tsx`. |
 | Sections | Exactly: Hero → About → Experience → Projects & Papers → Contact. No additions without Toby. |
-| Hero | Full-screen tumbling scene + name/tagline overlay + **3D toon wagon accent** (`src/three/HeroScene.tsx`, lazy, WebGL-gated). Toby demanded the 3D element twice — do not remove it. |
+| Hero | Full-screen tumbling scene + name/tagline overlay. No separate 3D or corner accent; Toby explicitly removed the wagon on 2026-07-15. |
 | Scene assets | `public/media/scenes/<section>.webm` + `.webp` poster. Sources: Toby's nano-banana-2 stills + Seedance/Gemini videos, processed via the pipeline in `docs/HIGGSFIELD.md` (color-match bg to #fbf6ea, VP9, ≤5 MB). Never replace with other imagery. |
 | Content | Curated only: ≤6 experience entries, ≤5 projects/papers, 2 bio paragraphs. Professional tone (college-app-grade). Links exactly: Email (toby@bffofamerica.org), LinkedIn, GitHub, ORCID, Instagram. No footer text. |
 | Palette | `--paper #fbf6ea` is load-bearing — every video bg is color-matched to it. Changing it breaks the full-bleed illusion everywhere. |
@@ -51,10 +51,9 @@ GitHub Actions on push to `main`).
   that touches >half the sections or replaces the theme/layout needs Toby's
   explicit, in-session confirmation — quote the Design Contract row you're
   changing and get a yes first.
-- **Dependency policy:** runtime deps are exactly `react`, `react-dom`,
-  `three`, `@react-three/fiber`, `@react-three/drei`. No animation/scroll/UI
-  libraries — native IntersectionObserver + CSS only. Ask Toby before adding
-  anything.
+- **Dependency policy:** runtime deps are exactly `react` and `react-dom`. No
+  animation/scroll/UI libraries — use native browser APIs + CSS only. Ask Toby
+  before adding anything.
 - **All copy lives in `src/data/content.ts`** — components never contain copy.
 - **Media discipline:** GitHub Pages limits (100 MB/file, ~1 GB repo). Compressed
   loops ≤5 MB each. Never commit raw generated video (process first).
@@ -87,7 +86,6 @@ src/
   data/content.ts             # ALL copy + links (curated — see contract)
   components/SceneChapter.tsx # full-screen scene chapter (the layout primitive)
   sections/                   # Hero, About, Experience, Work, Contact
-  three/HeroScene.tsx         # 3D toon wagon (hero accent, only R3F scene)
   hooks/useRevealOnScroll.ts  # fail-safe scroll reveals
   styles/global.css           # design tokens + chapter layout
 public/media/scenes/          # <section>.webm + .webp poster (5 scenes)

@@ -23,17 +23,13 @@ export type ContactLink = {
 
 export const bio = {
   name: 'Toby Qin',
-  tagline: 'Student · researcher · builder — exploring economics, science, and everything in between.',
+  tagline:
+    'I create opportunities at BFFA and spend the rest of my time researching whatever catches my attention.',
   about: [
-    `I'm a student at East Chapel Hill High School in North Carolina (class of 2027),
-     where I'm ranked 1st in my class. I spend my time on econometrics research,
-     microbiology experiments, and teaching kids about money.`,
-    `I serve as State President of North Carolina DECA, leading 13,000+ members, and
-     I co-founded Building Financial Futures of America, a national 501(c)(3) nonprofit
-     that has taught financial literacy to 300+ students across 7 states. Summers, I
-     conduct econometrics research at UC Santa Cruz through the Science Internship
-     Program. I also fence saber (top 3 in the Southeast region) and tutor SAT math
-     to students in 12 countries.`,
+    `I'm a student at East Chapel Hill High School, where I split my time between
+     econometrics, microbiology, and teaching financial literacy.`,
+    `I lead North Carolina DECA, co-founded BFFA, and spend my summers doing research
+     at UC Santa Cruz. Outside of that, I fence saber and tutor SAT math.`,
   ],
 }
 
@@ -134,8 +130,7 @@ export const works: WorkItem[] = [
 ]
 
 export const ui = {
-  heroKicker: 'A comic strip about',
-  contactIntro: 'Come explore with me:',
+  contactIntro: 'Find me here:',
   paperTag: 'Paper',
   projectTag: 'Project',
   readPaper: 'Read the paper',
