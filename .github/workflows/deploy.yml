@@ -23,14 +23,16 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: |
+      - shell: bash
+        run: |
           npm ci 2>&1 | tee /tmp/ci.log || {
             tail -n 30 /tmp/ci.log | while IFS= read -r line; do echo "::error::${line}"; done
             exit 1
           }
-      - run: |
+      - shell: bash
+        run: |
           npm run build 2>&1 | tee /tmp/build.log || {
-            tail -n 30 /tmp/build.log | while IFS= read -r line; do echo "::error::${line}"; done
+            tail -n 40 /tmp/build.log | while IFS= read -r line; do echo "::error::${line}"; done
             exit 1
           }
       - uses: actions/configure-pages@v5
