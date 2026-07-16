@@ -4,8 +4,23 @@
 > New session: read `AGENTS.md` first (especially the Design Contract and the
 > "how this project got burned" section), then `PLAN.md`, then this.
 
-**Last session:** 2026-07-16 — scroll cinematics + design-review pass; deploy
-switched to the real Actions workflow.
+**Last session:** 2026-07-16 — scroll cinematics + design-review pass; **SITE IS
+LIVE at https://tobyhqin.github.io** (verified with agent-browser screenshots).
+
+## Session-9 delta — go-live debugging (read if deploys break again)
+
+- Root causes fixed, in order: (1) Pages source was "branch" → served raw repo
+  source; Toby flipped to GitHub Actions. (2) Actions were disabled repo-wide →
+  workflow registered but zero runs ever; Toby enabled. (3) `npm ci` failed on
+  linux: Windows-generated lockfile omits `@emnapi/*` transitive deps of the
+  linux rolldown bindings → workflow now uses `npm install` (keep it that way
+  while lockfiles are regenerated on Windows). Deploy run green; live page
+  serves the built app, 5 videos, no 404s.
+- CI failure output is now surfaced as `::error` annotations (readable via the
+  public API without repo admin) — `shell: bash` matters, default step shell
+  has no pipefail and tee masks failures.
+- Phase 8 COMPLETE. Remaining niceties: Toby's own-device scroll-through,
+  optional contact-scene regen, custom favicon, nav active-state underline.
 
 ## Session-8 delta
 
