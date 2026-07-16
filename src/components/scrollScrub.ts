@@ -9,3 +9,7 @@ export function scrollScrubTime(
 
   return progress * duration
 }
+
+export function smoothScrubTime(current: number, target: number, elapsedMs: number): number {
+  return target + (current - target) * Math.exp(-Math.max(0, elapsedMs) / 90)
+}

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
-import { scrollScrubTime } from './scrollScrub'
+import { scrollScrubTime, smoothScrubTime } from './scrollScrub'
 
 /**
  * A full-viewport comic scene chapter. The scene video is sticky and fills the
@@ -26,16 +26,35 @@ export function SceneChapter({ id, align = 'center', children }: Props) {
     if (!chapter || !video || matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let frame = 0
-    const update = () => {
+    let initialized = false
+    let previousTimestamp = 0
+    const update = (timestamp: number) => {
       frame = 0
       if (!Number.isFinite(video.duration) || video.duration <= 0) return
 
       const bounds = chapter.getBoundingClientRect()
       const target = scrollScrubTime(bounds.top, bounds.height, innerHeight, video.duration)
-      if (Math.abs(video.currentTime - target) > 1 / 60) video.currentTime = target
+      if (!initialized) {
+        video.currentTime = target
+        initialized = true
+        return
+      }
+
+      const next = smoothScrubTime(video.currentTime, target, timestamp - previousTimestamp)
+      previousTimestamp = timestamp
+      if (Math.abs(next - target) <= 1 / 60) {
+        video.currentTime = target
+        return
+      }
+
+      video.currentTime = next
+      frame = requestAnimationFrame(update)
     }
     const scheduleUpdate = () => {
-      if (!frame) frame = requestAnimationFrame(update)
+      if (!frame) {
+        previousTimestamp = performance.now()
+        frame = requestAnimationFrame(update)
+      }
     }
 
     video.pause()

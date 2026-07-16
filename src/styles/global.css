@@ -386,6 +386,11 @@ a:hover {
   font-size: 1.3rem;
 }
 
+.contact-email {
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+}
+
 /* ---- scroll-driven cinematics (native CSS, graceful no-op elsewhere) ----
    The scene drifts/zooms softly through its chapter; titles slap in with a
    hand-drawn tilt; the hero copy floats away as you leave it. */

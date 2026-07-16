@@ -41,8 +41,8 @@ GitHub Actions on push to `main`).
 | Layout | **Full-screen scene chapters.** Each of the 5 sections is a full-viewport C&H scene video (sticky, `object-fit: contain`, bg color-matched to `--paper #fbf6ea`) with the giant hand-lettered title over it and content panels that scroll over the scene, hugging the scene's empty side. Implemented in `src/components/SceneChapter.tsx`. |
 | Sections | Exactly: Hero → About → Experience → Projects & Papers → Contact. No additions without Toby. |
 | Hero | Full-screen tumbling scene + name/tagline overlay. No separate 3D or corner accent; Toby explicitly removed the wagon on 2026-07-15. |
-| Scene assets | `public/media/scenes/<section>.webm` + `.webp` poster. Sources: Toby's nano-banana-2 stills + Seedance/Gemini videos, processed via the pipeline in `docs/HIGGSFIELD.md` (color-match bg to #fbf6ea, VP9, ≤5 MB). Never replace with other imagery. |
-| Content | Curated only: ≤6 experience entries, ≤5 projects/papers, 2 bio paragraphs. Professional tone (college-app-grade). Links exactly: Email (toby@bffofamerica.org), LinkedIn, GitHub, ORCID, Instagram. No footer text. |
+| Scene assets | `public/media/scenes/<section>.mp4` + `.webp` poster. Sources: Toby's nano-banana-2 stills + Seedance/Gemini videos, processed via the pipeline in `docs/HIGGSFIELD.md` (color-match bg to #fbf6ea, all-intra H.264, ≤5 MB). Never replace with other imagery. |
+| Content | Curated only: ≤6 experience entries, ≤5 projects/papers, 2 bio paragraphs. Professional tone (college-app-grade). Contact exactly: LinkedIn, GitHub, ORCID, and Instagram links, then plain-text email (toby@bffofamerica.org). No footer text. |
 | Palette | `--paper #fbf6ea` is load-bearing — every video bg is color-matched to it. Changing it breaks the full-bleed illusion everywhere. |
 
 ## Hard rules
@@ -88,7 +88,7 @@ src/
   sections/                   # Hero, About, Experience, Work, Contact
   hooks/useRevealOnScroll.ts  # fail-safe scroll reveals
   styles/global.css           # design tokens + chapter layout
-public/media/scenes/          # <section>.webm + .webp poster (5 scenes)
+public/media/scenes/          # <section>.mp4 + .webp poster (5 scenes)
 docs/HIGGSFIELD.md            # asset generation + processing pipeline
 .github/workflows/deploy.yml  # Pages deploy on push to main
 ```

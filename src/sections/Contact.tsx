@@ -21,6 +21,7 @@ export function Contact() {
               </li>
             ))}
           </ul>
+          <p className="contact-email">{ui.contactEmail}</p>
         </div>
       </div>
     </SceneChapter>

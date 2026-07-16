@@ -1,14 +1,17 @@
 # HIGGSFIELD.md — scene asset generation
 
-> **CURRENT PIPELINE (2026-07-15, scene-scroll design):** assets are full-screen
-> SCENE videos in `public/media/scenes/<section>.webm` + `.webp` poster.
+> **CURRENT PIPELINE (2026-07-16, scroll-scrub design):** assets are full-screen
+> scene videos in `public/media/scenes/<section>.mp4` + `.webp` poster.
 > 1. Toby generates a 16:9 still (nano banana 2) and a 5 s cyclic video from it
 >    (Gemini Omni / Seedance). Prompt constraints that matter: first frame =
 >    exactly the input still (no fade-in from black), static camera, characters
 >    anchored in place, steady ~2 s motion cycle, background unchanged.
-> 2. Processing (script pattern in repo history, session 2026-07-15): sample bg
+> 2. Processing: sample bg
 >    at (10,10) of frame 0 → ffmpeg `lutrgb` gains to map bg → `#fbf6ea` →
->    `scale=1280:-2`, VP9 `-crf 41`, `-an` → poster = frame 0 as webp. ≤5 MB/file.
+>    `scale=1152:-2`, `-an`, then all-intra H.264 (`-c:v libx264 -g 1
+>    -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart`). Tune
+>    CRF until ≤5 MB/file. Every frame must be a keyframe so scroll seeks land
+>    immediately; export frame 0 as the `.webp` poster.
 > 3. Drop into `public/media/scenes/`, verify with agent-browser, commit.
 >
 > Everything below is the older corner-character workflow — superseded, kept for

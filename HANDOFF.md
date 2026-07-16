@@ -1,97 +1,55 @@
 # HANDOFF.md
 
 > Rewritten at the end of every session. Describes the state of the repo *right now*.
-> New session: read `AGENTS.md` first (especially the Design Contract and the
-> "how this project got burned" section), then `PLAN.md`, then this.
+> New session: read `AGENTS.md`, then `PLAN.md`, then this file.
 
-**Last session:** 2026-07-16 — scroll-scrubbed scenes + Toby's revision pass;
-**SITE IS LIVE at https://tobyhqin.github.io**.
-
-## Session-11 delta
-
-- **Scenes are scroll-CONTROLLED now** (commit a65f080 + this session): videos
-  never autoplay — scrolling scrubs `video.currentTime` through each chapter,
-  forward and backward (boomerang). Logic in `SceneChapter.tsx` +
-  `components/scrollScrub.ts` (has a unit-test reproducer). Verified live:
-  t=0.00 at rest → 5.01 scrolled → reverses to 1.67 scrolling back.
-- **3D wagon + three.js fully removed** (Toby's call — hero is name + tagline
-  over the scrubbed tumble scene). Runtime deps now exactly react + react-dom.
-- Copy de-AI'd by Toby (nonchalant tagline/about, "Find me here:"); hero kicker
-  gone. Keep this voice — don't re-formalize it.
-- Contact panel repositioned into the open sky above the characters; the page's
-  final scroll beat is the clean walking-into-snow frame.
-- Verified: build green, wagon gone, scrub + boomerang live, contact clear.
-
-## Session-9 delta — go-live debugging (read if deploys break again)
-
-- Root causes fixed, in order: (1) Pages source was "branch" → served raw repo
-  source; Toby flipped to GitHub Actions. (2) Actions were disabled repo-wide →
-  workflow registered but zero runs ever; Toby enabled. (3) `npm ci` failed on
-  linux: Windows-generated lockfile omits `@emnapi/*` transitive deps of the
-  linux rolldown bindings → workflow now uses `npm install` (keep it that way
-  while lockfiles are regenerated on Windows). Deploy run green; live page
-  serves the built app, 5 videos, no 404s.
-- CI failure output is now surfaced as `::error` annotations (readable via the
-  public API without repo admin) — `shell: bash` matters, default step shell
-  has no pipefail and tee masks failures.
-- Phase 8 COMPLETE. Remaining niceties: Toby's own-device scroll-through,
-  optional contact-scene regen, custom favicon, nav active-state underline.
-
-## Session-8 delta
-
-- Scroll-driven cinematics added (native CSS `animation-timeline`, no deps):
-  scene drift/zoom via a named `--chapter` view-timeline, title slap-in with
-  hand-drawn tilt, hero copy floats away on exit, springy staggered panel
-  reveals. 3D wagon wheels spin with scroll; wagon leans with scroll velocity.
-- Independent design-subagent review ran (verdict: SHIP WITH FIXES); all six
-  fixes applied — notably: the reveal fail-safe no longer disarms the panel
-  animation (clearTimeout on first IO callback), reduced-motion now removes
-  timeline animations outright (`animation: none`, since duration tricks don't
-  stop scroll-mapped progress), and `mix-blend-mode: multiply` on scenes melts
-  any residual bg mismatch into the paper (this replaced visible media edges).
-- Nav masthead solid paper + feather; mobile hero recomposed (copy top, scene
-  band low via `object-position`, smaller wagon); contact panel narrowed off
-  the characters; UI copy moved to `content.ts` (`ui` export).
-- Deferred nit (fine to add later): active-section underline in the nav.
-- Pages source was still "branch" at session start (site served raw repo!);
-  Toby flipped it — verify runs named **"Deploy to GitHub Pages"** (the
-  built-in "pages build and deployment" = wrong source setting).
+**Last session:** 2026-07-16 — eased scene scrubbing + curated content refresh.
+**SITE IS LIVE at https://tobyhqin.github.io**, but this session's commit is local
+until Toby explicitly approves a push.
 
 ## Current state
 
-- **The site is the intended design, verified with real screenshots:** five
-  full-screen C&H scene chapters (SceneChapter primitive), giant hand-lettered
-  titles over the scenes, panels scrolling over each scene's empty side, 3D toon
-  wagon accent in the hero, curated professional content, no footer.
-- All five scene videos processed and committed (`public/media/scenes/`,
-  0.7–4.3 MB each + posters). Contact scene is the weakest (model recomposed the
-  still) — Toby accepted it for now; regeneration prompt notes in HIGGSFIELD.md.
-- Old corner-CharacterStage design fully retired (components deleted, character
-  webps removed); the scenes replace it.
-- Verification was done with **agent-browser** (global CLI + project skill) —
-  use it, not the desktop-app preview pane (broken renderer: no
-  IntersectionObserver, no screenshots). Chapters screenshotted at desktop
-  width; content solid, characters visible, no overflow, no console errors.
-- Everything committed and pushed to `main`.
+- Five full-screen Calvin & Hobbes scene chapters remain exactly as contracted:
+  Hero → About → Experience → Projects & Papers → Contact.
+- Scene videos are all-intra H.264 MP4s. Scroll still controls video time in both
+  directions, but `SceneChapter.tsx` now eases toward the target over successive
+  animation frames instead of hard-seeking once per wheel/touch delta.
+- `scrollScrub.ts` owns both the scroll mapping and refresh-rate-independent
+  smoothing. `test/scrollScrub.test.ts` covers mapping, clamping, and smoothing.
+- Experience is exactly: NC DECA, BFF of America, UCSC SIP, Cornell SC Johnson,
+  and NCYSS, in that order. Counts reflect Toby's 2026-07-16 Common App update.
+- Projects & Papers is exactly: FAFSA preprint (linked to SSRN), Cornell automatic-
+  gratuity paper, NC DECA app, NC DECA Blueprint/mentorship hub, and BFF personal-
+  finance app.
+- Michael Lynn's current official Cornell wording is reflected as Michael D.
+  Johnson and Family Professor of Services Marketing Emeritus.
+- Contact shows LinkedIn, GitHub, ORCID, and Instagram as links, then
+  `toby@bffofamerica.org` as plain text with no `mailto:` link.
 
-## Toby's outstanding items (nothing else blocks go-live)
+## Verification
 
-1. Repo **Settings → Pages → Source: "GitHub Actions"** → site goes live at
-   https://tobyhqin.github.io on the already-pushed commit.
-2. A personal scroll-through in his own browser (mobile too) for sign-off.
-3. Optional: regenerate the contact scene video if it still bothers him.
+- `npm test`: 3/3 passed.
+- `npm run test:coverage`: 100% for `scrollScrub.ts`.
+- `npm run lint`: passed.
+- `npm run build`: passed.
+- Agent-browser screenshots inspected for all five chapters at 1440×900 and
+  375×812. No horizontal overflow or page errors; all five videos reached
+  `readyState = 4`.
+- Live timing sample: a wheel-sized hero jump produced 23 intermediate video
+  times over 24 animation frames, monotonically approaching the target.
+- Reduced-motion check renders five posters and zero videos.
 
-## Warnings / gotchas
+## Deploy gotchas
 
-- **Do not re-theme, re-layout, or content-dump. See AGENTS.md Design Contract.**
-  The previous agent did; everything it made was reverted (`b0dd06e`).
-- `--paper #fbf6ea` is color-matched into every video background — changing the
-  token breaks the full-bleed illusion.
-- Desktop-app preview pane cannot verify this site (dead renderer) — agent-browser
-  only.
-- Patrick Hand SC must stay `font-weight: 400` (synthesized bold distorts it).
-- Higgsfield CLI is installed + authed (workspace Private). `--resolution "768"`
-  style numeric-string params mis-parse — omit flags for defaults.
-- 4 Higgsfield credits remain (below cheapest video job); Seedance "unlimited"
-  claim was never verified this session — check `hf account status` before
-  planning generation there. Gemini Omni (Toby's side) produced the current videos.
+- Pages source must remain **GitHub Actions**.
+- Keep `.github/workflows/deploy.yml` on `npm install`; the Windows-generated
+  lockfile previously caused missing Linux rolldown transitive dependencies with
+  `npm ci`.
+- Verify deploys under the workflow named **Deploy to GitHub Pages**.
+
+## Warnings
+
+- Do not re-theme, re-layout, or import the rest of the Common App activity list.
+- Keep `--paper #fbf6ea`; scene backgrounds are color-matched to it.
+- Use agent-browser for visual verification; the desktop-app preview renderer is
+  not reliable for this site.
