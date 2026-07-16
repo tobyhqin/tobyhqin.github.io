@@ -23,9 +23,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # npm install, not npm ci: Windows-generated lockfiles omit transitive deps
+      # of linux-only optional bindings (@emnapi/* via rolldown) — npm ci then
+      # fails EUSAGE on linux runners. npm install resolves them fine.
       - shell: bash
         run: |
-          npm ci 2>&1 | tee /tmp/ci.log || {
+          npm install 2>&1 | tee /tmp/ci.log || {
             tail -n 30 /tmp/ci.log | while IFS= read -r line; do echo "::error::${line}"; done
             exit 1
           }
