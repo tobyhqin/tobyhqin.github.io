@@ -50,8 +50,8 @@ export const experience: ExperienceItem[] = [
     role: 'President & Co-Founder',
     period: 'Jul 2025 – Present',
     bullets: [
-      'Co-founded an international 501(c)(3) that has taught financial literacy to 1,700+ K-12 students through 40+ chapters in 15 states',
-      'Impacted 10,000+ students, generated 500,000+ social media impressions, and collected 5,000+ items through community drives',
+      'Co-founded an international 501(c)(3) that has taught financial literacy to 10,000+ K-12 students through 100+ chapters in 20 states',
+      'Impacted 10,000+ students, generated 1,000,000+ social media impressions, and collected 30,000+ items through community drives',
       'Advocating for earlier personal-finance instruction through a legislative proposal with Allen Buansi, planned for introduction next year',
     ],
   },
@@ -78,7 +78,7 @@ export const experience: ExperienceItem[] = [
     role: 'Student Researcher',
     period: 'Mar 2024 – Present',
     bullets: [
-      'Selected as 1 of 30 students statewide and awarded $500 for independent microbiology research',
+      'Selected as 1 of 30 students statewide and awarded $750 for independent microbiology research',
       'Used linear mixed-effects models to predict alpha-diversity measures in stormwater runoff',
       'Presented at the North Carolina Museum of Natural Sciences and published the research in Microbiology Spectrum',
     ],
