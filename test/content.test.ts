@@ -8,13 +8,14 @@ test('keeps the approved papers and NC DECA app in order', () => {
     [
       'Universal FAFSA Mandates and the Activation of Student Aid',
       'Does automatic gratuity help or hurt servers? An examination of a casual restaurant’s POS data',
+      'Rounding and the Bill-Size Gradient in Restaurant Tipping',
       'Stormwater microbiome modeling',
       'ICE IGSA facility expansion study',
       'NC DECA app',
     ],
   )
 
-  assert.match(works.at(-1)?.description ?? '', /2,000\+/)
+  assert.match(works.at(-1)?.description ?? '', /3,000\+/)
   assert.doesNotMatch(
     works.filter(({ kind }) => kind === 'project').map(({ description }) => description).join(' '),
     /\b(?:built|rebuilt|launched)\b/i,

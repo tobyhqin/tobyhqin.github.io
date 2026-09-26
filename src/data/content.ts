@@ -1,5 +1,5 @@
 // ALL site copy and links live here. Components render this — they never contain copy.
-// Source: Toby Qin - Common App activities (2026-07-16).
+// Source: Toby Qin - curated portfolio updates (2026-09-25).
 
 export type ExperienceItem = {
   org: string
@@ -80,7 +80,7 @@ export const experience: ExperienceItem[] = [
     bullets: [
       'Selected as 1 of 30 students statewide and awarded $500 for independent microbiology research',
       'Used linear mixed-effects models to predict alpha-diversity measures in stormwater runoff',
-      'Presented at the North Carolina Museum of Natural Sciences and submitted a 29-page manuscript to Microbiology Spectrum',
+      'Presented at the North Carolina Museum of Natural Sciences and published the research in Microbiology Spectrum',
     ],
   },
 ]
@@ -91,7 +91,7 @@ export const works: WorkItem[] = [
     kind: 'paper',
     description:
       'With Sajad Tahavori, I examine whether universal FAFSA-completion mandates lead more students to claim financial aid, not just submit the form.',
-    venue: 'Preprint, SSRN (2026)',
+    venue: 'Preprint, SSRN (2026) · Accepted for presentation at the 1st International Conference on Social Sciences',
     paperUrl: 'https://ssrn.com/abstract=7046179',
   },
   {
@@ -100,14 +100,23 @@ export const works: WorkItem[] = [
     kind: 'paper',
     description:
       'With Michael Lynn, Cornell’s Michael D. Johnson and Family Professor of Services Marketing Emeritus, I use a casual restaurant’s point-of-sale data to test how automatic gratuities affect server earnings.',
-    venue: 'Working paper, Cornell SC Johnson College of Business',
+    venue: 'Working paper, Cornell SC Johnson College of Business · Accepted for presentation at the 12th International Tourism and Hospitality Management Congress',
+  },
+  {
+    title: 'Rounding and the Bill-Size Gradient in Restaurant Tipping',
+    kind: 'paper',
+    description:
+      'First-author paper examining how rounding relates to the bill-size gradient in restaurant tipping.',
+    venue: 'Journal of Economic and Social Dynamics, under review · Preprint available',
+    paperUrl: 'https://doi.org/10.31235/osf.io/xvfde_v1',
   },
   {
     title: 'Stormwater microbiome modeling',
     kind: 'paper',
     description:
-      'I use linear mixed-effects models to predict alpha-diversity measures in stormwater runoff and present the findings in a 29-page manuscript.',
-    venue: 'Submitted to Microbiology Spectrum',
+      'I use linear mixed-effects models to predict alpha-diversity measures in stormwater runoff.',
+    venue: 'Published in Microbiology Spectrum',
+    paperUrl: 'https://doi.org/10.1128/spectrum.04051-25',
   },
   {
     title: 'ICE IGSA facility expansion study',
@@ -120,7 +129,7 @@ export const works: WorkItem[] = [
     title: 'NC DECA app',
     kind: 'project',
     description:
-      'The NC DECA app serves 2,000+ users as a competition-prep tool, helping members compare events, choose the right event at different levels of competition, and prepare for each stage.',
+      'The NC DECA app serves 3,000+ users as a competition-prep tool, helping members compare events, choose the right event at different levels of competition, and prepare for each stage.',
   },
 ]
 
